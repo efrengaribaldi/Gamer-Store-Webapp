@@ -26,8 +26,8 @@ DROP TABLE IF EXISTS `article`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `article` (
   `id` int NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `precio` int NOT NULL,
+  `articleName` varchar(255) NOT NULL,
+  `price` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,13 +50,13 @@ DROP TABLE IF EXISTS `cart`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cart` (
   `id` int NOT NULL,
-  `totalVenta` int NOT NULL,
-  `fecha` date NOT NULL,
-  `customerid` int DEFAULT NULL,
+  `totalSale` int NOT NULL,
+  `cartDate` date NOT NULL,
+  `customerId` int DEFAULT NULL,
   `Status` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `customerid` (`customerid`),
-  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`customerid`) REFERENCES `customer` (`id`)
+  KEY `customerId` (`customerId`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -78,9 +78,9 @@ DROP TABLE IF EXISTS `customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
   `id` int NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `direccion` varchar(255) NOT NULL,
-  `facturacion` varchar(255) NOT NULL,
+  `customerName` varchar(255) NOT NULL,
+  `direction` varchar(255) NOT NULL,
+  `billing` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -103,15 +103,15 @@ DROP TABLE IF EXISTS `movement`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `movement` (
   `id` int NOT NULL,
-  `cartid` int NOT NULL,
-  `articleid` int NOT NULL,
-  `cantidad` int DEFAULT NULL,
+  `cartId` int NOT NULL,
+  `articleId` int NOT NULL,
+  `quantity` int DEFAULT NULL,
   `total` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `cartid` (`cartid`),
-  KEY `articleid` (`articleid`),
-  CONSTRAINT `movement_ibfk_1` FOREIGN KEY (`cartid`) REFERENCES `cart` (`id`),
-  CONSTRAINT `movement_ibfk_2` FOREIGN KEY (`articleid`) REFERENCES `article` (`id`)
+  KEY `cartId` (`cartId`),
+  KEY `articleId` (`articleId`),
+  CONSTRAINT `movement_ibfk_1` FOREIGN KEY (`cartId`) REFERENCES `cart` (`id`),
+  CONSTRAINT `movement_ibfk_2` FOREIGN KEY (`articleId`) REFERENCES `article` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -125,32 +125,6 @@ LOCK TABLES `movement` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `id` int NOT NULL,
-  `nombre` int NOT NULL,
-  `userRoleid` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userRoleid` (`userRoleid`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`userRoleid`) REFERENCES `userRole` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `userRole`
 --
 
@@ -159,7 +133,7 @@ DROP TABLE IF EXISTS `userRole`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `userRole` (
   `id` int NOT NULL,
-  `nombre` varchar(255) NOT NULL,
+  `userRoleName` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -172,6 +146,32 @@ LOCK TABLES `userRole` WRITE;
 /*!40000 ALTER TABLE `userRole` DISABLE KEYS */;
 /*!40000 ALTER TABLE `userRole` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` int NOT NULL,
+  `userName` int NOT NULL,
+  `userRoleid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userRoleid` (`userRoleid`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`userRoleid`) REFERENCES `userRole` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -182,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-18 11:38:36
+-- Dump completed on 2022-03-18 11:55:41
