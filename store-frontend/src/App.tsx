@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomepageView from "./views/homepage/HomepageView";
+import HomepageView from "./views/HomepageView";
 
 const App: React.FC = () => {
   return (
