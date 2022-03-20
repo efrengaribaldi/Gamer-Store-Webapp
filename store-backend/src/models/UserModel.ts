@@ -1,12 +1,5 @@
 import { Schema, model } from "mongoose";
-
-// Fix bug
-interface User {
-  username: string;
-  email: string;
-  password: string;
-  isAdmin: boolean;
-}
+import User from "../interfaces/User";
 
 const UserSchema = new Schema<User>(
   {

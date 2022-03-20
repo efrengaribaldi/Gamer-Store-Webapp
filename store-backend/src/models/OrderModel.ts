@@ -1,13 +1,5 @@
 import { Schema, model } from "mongoose";
-
-
-interface Order {
-  userId: string;
-  products: Array<string>;
-  amount: number;
-  address: Object;
-  status: string;
-}
+import Order from "../interfaces/Order";
 
 const OrderSchema = new Schema<Order>(
   {

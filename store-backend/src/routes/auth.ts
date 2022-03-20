@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import UserModel from "../models/UserModel";
-const jwt = require("jsonwebtoken");
-const CryptoJS = require("crypto-js");
+import jwt from "jsonwebtoken";
+import CryptoJS from "crypto-js";
 
 const authRouter = express.Router();
 
@@ -12,7 +12,7 @@ authRouter.post("/register", async (req, res) => {
     email: req.body.email,
     password: CryptoJS.AES.encrypt(
       req.body.password,
-      process.env.PASS_SEC
+      process.env.PASS_SEC!
     ).toString(),
   });
   try {
@@ -28,7 +28,7 @@ authRouter.post("/login", async (req, res) => {
   try {
     const user = await UserModel.findOne({ username: req.body.username });
     !user && res.status(404).json({ message: "User not found" });
-    const hash = CryptoJS.AES.decrypt(user?.password, process.env.PASS_SEC);
+    const hash = CryptoJS.AES.decrypt(user?.password!, process.env.PASS_SEC!);
     const password = hash.toString(CryptoJS.enc.Utf8);
     password !== req.body.password &&
       res.status(401).json({ message: "Wrong credentials" });
@@ -38,7 +38,7 @@ authRouter.post("/login", async (req, res) => {
         id: user?._id,
         isAdmin: user?.isAdmin,
       },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET!,
       { expiresIn: "3d" }
     );
     res.status(200).json({
@@ -46,7 +46,7 @@ authRouter.post("/login", async (req, res) => {
       email: user?.email,
       isAdmin: user?.isAdmin,
       accessToken: accessToken,
-      id: user?._id
+      id: user?._id,
     });
   } catch (error) {
     res.status(500).json(error);

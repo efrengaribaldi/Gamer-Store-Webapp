@@ -5,7 +5,7 @@ import {
   verifyTokenAndAdmin,
   verifyTokenAuthorization,
 } from "./verifyToken";
-const CryptoJS = require("crypto-js");
+import CryptoJS from "crypto-js";
 
 const userRouter = express.Router();
 
@@ -14,7 +14,7 @@ userRouter.put("/:id", verifyTokenAuthorization, async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
-      process.env.PASS_SEC
+      process.env.PASS_SEC!
     ).toString();
   }
   try {

@@ -1,10 +1,5 @@
 import { Schema, model } from "mongoose";
-
-interface Cart {
-  userId: string;
-  products: Array<string>;
-
-}
+import Cart from "../interfaces/Cart";
 
 const CartSchema = new Schema<Cart>(
   {

@@ -1,14 +1,5 @@
 import { Schema, model } from "mongoose";
-
-interface Product {
-  title: string;
-  description: string;
-  image: string;
-  categories: Array<string>;
-  size: string;
-  color: string;
-  price: number;
-}
+import Product from "../interfaces/Product";
 
 const ProductSchema = new Schema<Product>(
   {
