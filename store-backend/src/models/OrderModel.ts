@@ -1,5 +1,14 @@
 import { Schema, model } from "mongoose";
 
+
+interface Order {
+  userId: string;
+  products: Array<string>;
+  amount: number;
+  address: Object;
+  status: string;
+}
+
 const OrderSchema = new Schema<Order>(
   {
     userId: { type: String, required: true },

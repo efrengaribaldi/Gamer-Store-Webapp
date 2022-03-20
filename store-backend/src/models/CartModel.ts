@@ -1,6 +1,12 @@
 import { Schema, model } from "mongoose";
 
-const ProductSchema = new Schema<Cart>(
+interface Cart {
+  userId: string;
+  products: Array<string>;
+
+}
+
+const CartSchema = new Schema<Cart>(
   {
     userId: { type: String, required: true },
     products: [
@@ -18,6 +24,6 @@ const ProductSchema = new Schema<Cart>(
   { timestamps: true }
 );
 
-const ProductModel = model<Cart>("Product", ProductSchema);
+const CartModel = model<Cart>("Cart", CartSchema);
 
-export default ProductModel;
+export default CartModel;
