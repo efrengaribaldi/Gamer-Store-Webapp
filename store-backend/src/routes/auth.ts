@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express from "express";
 import UserModel from "../models/UserModel";
 import jwt from "jsonwebtoken";
 import CryptoJS from "crypto-js";
