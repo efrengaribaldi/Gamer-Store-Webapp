@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomepageView from "./views/HomepageView";
 import Product from "./views/Product";
 import ProductList from "./views/ProductList";
+import Register from "./views/Register";
 
 const App: React.FC = () => {
   return (
@@ -12,7 +13,8 @@ const App: React.FC = () => {
     //   </Routes>
     // </BrowserRouter>
     //<ProductList/>
-    <Product/>
+    //<Product/>
+    <Register/>
   );
 };
 
