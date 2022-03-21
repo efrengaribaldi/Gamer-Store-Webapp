@@ -91,7 +91,7 @@ const Button = styled.button`
   }
 `;
 
-const Product: React.FC = () => {
+const ProductView: React.FC = () => {
   return (
     <Container>
       <Navbar />
@@ -136,4 +136,4 @@ const Product: React.FC = () => {
   );
 };
 
-export default Product;
+export default ProductView;
