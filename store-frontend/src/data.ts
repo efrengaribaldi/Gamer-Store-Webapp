@@ -1,3 +1,5 @@
+
+
 export const sliderItems = [
     {
         id: 1,
@@ -20,5 +22,61 @@ export const sliderItems = [
         desc: "THE BEST ADD-ONS COMPONENTS UP TO 30% OFF",
         bg: "fbf0f4"
     },
+
+]
+
+export const categories = [
+    {
+        id:1,
+        img:"https://subgurim.net/imagenes/las-mejores-memorias-ram-para-pc.jpg",
+        title:"PC PARTS",
+    },
+    {
+        id:2,
+        img:"https://images10.newegg.com/NeweggImage/ProductImage/11-147-292-V10.jpg",
+        title:"PC CASES",
+    },
+    {
+        id:3,
+        img:"https://assets2.razerzone.com/images/pnx.assets/1015a075bd6fcb7c4b3e2681cd6ab88c/razer-deathadder-v2-halo-gallery-1.jpg",
+        title:"PC ADD-ONS",
+    },
+
+]
+
+export const popularProducts = [
+    {
+        id:1,
+        img:"https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",
+    },
+    {
+        id:2,
+        img:"https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",
+    },
+    {
+        id:3,
+        img:"https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",
+    },
+    {
+        id:4,
+        img:"https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",
+    },
+    {
+        id:5,
+        img:"https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",
+    },
+    {
+        id:6,
+        img:"https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",
+    },
+    {
+        id:7,
+        img:"https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",
+    },
+    {
+        id:8,
+        img:"https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",
+    },
+    
 
 ]
