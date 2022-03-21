@@ -14,7 +14,7 @@ const App: React.FC = () => {
     // </BrowserRouter>
     //<ProductList/>
     //<Product/>
-    <Register/>
+    <Register />
   );
 };
 
