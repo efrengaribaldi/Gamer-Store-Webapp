@@ -45,7 +45,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Register: React.FC = () => {
+const RegisterView: React.FC = () => {
   return (
     <Container>
       <Wrapper>
@@ -68,4 +68,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default RegisterView;

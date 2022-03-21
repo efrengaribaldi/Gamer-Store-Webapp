@@ -27,7 +27,7 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 
-const ProductList: React.FC = () => {
+const ProductListView: React.FC = () => {
   return (
     <Container>
       <Navbar />
@@ -70,4 +70,4 @@ const ProductList: React.FC = () => {
   );
 };
 
-export default ProductList;
+export default ProductListView;

@@ -4,11 +4,8 @@ import {
   ShoppingCartOutlined,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import IPopularProduct from "../interfaces/IPopularProduct";
 
-interface Items {
-  id: number;
-  img: string;
-}
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -69,7 +66,7 @@ const Icon = styled.div`
   }
 `;
 
-const Product: React.FC<Items> = ({ id, img }) => {
+const Product: React.FC<IPopularProduct> = ({ id, img }) => {
   return (
     <Container>
       <Circle />

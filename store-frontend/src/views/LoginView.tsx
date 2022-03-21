@@ -8,7 +8,7 @@ const Input = styled.div``;
 const Button = styled.div``;
 const Link = styled.div``;
 
-const Login: React.FC = () => {
+const LoginView: React.FC = () => {
   return (
     <Container>
       <Wrapper>
@@ -27,4 +27,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginView;

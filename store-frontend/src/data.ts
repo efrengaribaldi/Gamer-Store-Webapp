@@ -1,4 +1,8 @@
-export const sliderItems = [
+import ICategory from "./interfaces/ICategory";
+import IPopularProduct from "./interfaces/IPopularProduct";
+import ISlider from "./interfaces/ISlider";
+
+export const sliderItems: ISlider[] = [
   {
     id: 1,
     title: "PC PARTS SALE",
@@ -22,7 +26,7 @@ export const sliderItems = [
   },
 ];
 
-export const categories = [
+export const categories: ICategory[] = [
   {
     id: 1,
     img: "https://subgurim.net/imagenes/las-mejores-memorias-ram-para-pc.jpg",
@@ -40,7 +44,7 @@ export const categories = [
   },
 ];
 
-export const popularProducts = [
+export const popularProducts: IPopularProduct[] = [
   {
     id: 1,
     img: "https://nexterapc.com/wp-content/uploads/2020/11/Case-Gamer-PC-Blanco-Quito-06.jpg",

@@ -1,10 +1,5 @@
 import styled from "styled-components";
-
-interface Item {
-  id: number;
-  img: string;
-  title: string;
-}
+import ICategory from "../interfaces/ICategory";
 
 const Container = styled.div`
   flex: 1;
@@ -41,7 +36,7 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-const CategoryItem: React.FC<Item> = ({ id, img, title }) => {
+const CategoryItem: React.FC<ICategory> = ({ id, img, title }) => {
   return (
     <Container>
       <Image src={img} />
