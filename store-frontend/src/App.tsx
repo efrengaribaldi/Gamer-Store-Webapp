@@ -5,6 +5,8 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/pay" />
+        <Route path="/success" />
         <Route path="/login" />
         <Route path="/" element={<HomepageView />} />
       </Routes>
