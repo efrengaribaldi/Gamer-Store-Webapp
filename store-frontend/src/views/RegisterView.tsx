@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobails } from "../responsive";
 
 const Container = styled.div`
   width: 110v;
@@ -9,22 +10,39 @@ const Container = styled.div`
     ),
     url("https://images.pexels.com/photos/7238759/pexels-photo-7238759.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
       center;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${mobails} {
+    background: none;
+  }
 `;
 const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: white;
+  ${mobails} {
+    width: 75%;
+    margin: 0 10px;
+    padding: 0;
+    position: relative;
+  }
 `;
 const Title = styled.h1`
-  font-size: 24px;
-  font-weight: 300;
+  font-size: 12px;
+  font-weight: 200;
+  ${mobails} {
+    position: absolute;
+  }
 `;
 const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
+  ${mobails} {
+    flex-direction: column;
+  }
 `;
 const Input = styled.input`
   flex: 1;
@@ -43,6 +61,9 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+  ${mobails} {
+    width: 75%;
+  }
 `;
 
 const RegisterView: React.FC = () => {

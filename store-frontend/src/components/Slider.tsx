@@ -2,6 +2,7 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { useState } from "react";
 import styled, { StyledFunction } from "styled-components";
 import { sliderItems } from "../data";
+import { mobails } from "../responsive";
 
 interface Props {
   direct: string;
@@ -19,6 +20,9 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+  ${mobails} {
+    display: none;
+  }
 `;
 
 const Arrow = styled.div`
@@ -60,6 +64,11 @@ const ImgContainer = styled.div`
 `;
 const Image = styled.img`
   height: 80%;
+  object-fit: cover;
+  width: 100%;
+  ${mobails} {
+    display: none;
+  }
 `;
 
 const InfoContainer = styled.div`
