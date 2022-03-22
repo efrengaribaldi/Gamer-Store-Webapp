@@ -6,6 +6,7 @@ import authRouter from "./routes/auth";
 import productRouter from "./routes/product";
 import orderRouter from "./routes/order";
 import cartRouter from "./routes/cart";
+import cors from "cors";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ mongoose
   .connect(mongooseurl)
   .then(() => console.log("DB Connection Successful!"));
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);

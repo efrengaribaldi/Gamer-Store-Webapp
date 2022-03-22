@@ -34,13 +34,13 @@ productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 
 //Delete
 productRouter.delete("/:id", productRouter, async (req, res) => {
-    try {
-      await ProductModel.findByIdAndDelete(req.params.id);
-      res.status(200).json({ message: "User deleted" });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  try {
+    await ProductModel.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "User deleted" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //Get Product
 productRouter.get("/find/:id", async (req, res) => {
@@ -64,7 +64,7 @@ productRouter.get("/", async (req, res) => {
         .limit(5);
     } else if (qCategory) {
       products = await ProductModel.find({
-        category: {
+        categories: {
           $in: [qCategory],
         },
       }).sort({ createdAt: -1 });
@@ -76,7 +76,5 @@ productRouter.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
 
 export default productRouter;

@@ -1,9 +1,9 @@
 export default interface Product {
   title: string;
   description: string;
-  image: string;
+  img: string;
   categories: string[];
-  size: string[];
+  type: string;
   color: string;
   price: number;
   inStock: boolean;
