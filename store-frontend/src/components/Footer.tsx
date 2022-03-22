@@ -9,6 +9,7 @@ import {
   Twitter,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { mobails } from "../responsive";
 
 interface PropsColor {
   color: string;
@@ -16,6 +17,10 @@ interface PropsColor {
 
 const Container = styled.div`
   display: flex;
+  ${mobails} {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 const Left = styled.div`
   flex: 1;
@@ -44,6 +49,9 @@ const SoacialIcon = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobails} {
+    display: none;
+  }
 `;
 const Title = styled.h3`
   margin-bottom: 30px;
@@ -65,6 +73,9 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobails} {
+    background-color: #eee;
+  }
 `;
 const ContactItem = styled.div`
   margin-bottom: 20px;

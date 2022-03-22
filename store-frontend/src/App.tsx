@@ -12,7 +12,9 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomepageView />} />
+        <Route path="/cart" element={<CartView />} />
+        <Route path="/products/:category" element={<ProductListView />} />
+        <Route path="/product/:id" element={<ProductView />} />
         <Route
           path="/login"
           element={user ? <Navigate to="/" /> : <LoginView />}
@@ -21,9 +23,7 @@ const App: React.FC = () => {
           path="/register"
           element={user ? <Navigate to="/" /> : <RegisterView />}
         />
-        <Route path="/products/:category" element={<ProductListView />} />
-        <Route path="/product/:id" element={<ProductView />} />
-        <Route path="/cart" element={<CartView />} />
+        <Route path="/" element={<HomepageView />} />
       </Routes>
     </BrowserRouter>
   );
