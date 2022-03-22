@@ -9,6 +9,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  ${mobails} {
+    width: 100%;
+  }
 `;
 const Title = styled.h1`
   font-size: 70px;

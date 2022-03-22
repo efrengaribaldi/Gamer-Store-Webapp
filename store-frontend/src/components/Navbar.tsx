@@ -40,6 +40,9 @@ const SearchContainger = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
+  ${mobails} {
+    padding-left: 0;
+  }
 `;
 
 const Input = styled.input`
@@ -57,7 +60,7 @@ const Center = styled.div`
 const Logo = styled.h1`
   font-weight: bold;
   ${mobails} {
-    font-size: 16px;
+    display: none;
   }
 `;
 
@@ -69,7 +72,7 @@ const Right = styled.div`
 
   ${mobails} {
     justify-content: center;
-    flex: 2;
+    flex: 3;
   }
 `;
 

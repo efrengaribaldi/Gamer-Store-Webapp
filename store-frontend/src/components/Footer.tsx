@@ -19,6 +19,7 @@ const Container = styled.div`
   display: flex;
   ${mobails} {
     flex-direction: column;
+    width: 100%;
   }
 `;
 const Left = styled.div`
