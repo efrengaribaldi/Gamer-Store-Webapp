@@ -9,6 +9,7 @@ const Container = styled.div`
     ),
     url("https://images.pexels.com/photos/7238759/pexels-photo-7238759.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
       center;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
