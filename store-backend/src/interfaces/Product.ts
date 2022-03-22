@@ -3,7 +3,8 @@ export default interface Product {
   description: string;
   image: string;
   categories: string[];
-  size: string;
+  size: string[];
   color: string;
   price: number;
+  inStock: boolean;
 }

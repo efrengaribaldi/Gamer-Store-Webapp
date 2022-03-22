@@ -16,6 +16,7 @@ const Categories: React.FC = () => {
           id={item.id}
           img={item.img}
           title={item.title}
+          cat={item.cat}
           key={item.id}
         />
       ))}

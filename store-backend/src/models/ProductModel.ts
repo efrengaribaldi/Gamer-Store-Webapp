@@ -7,9 +7,10 @@ const ProductSchema = new Schema<Product>(
     description: { type: String, required: true },
     image: { type: String, required: true },
     categories: [{ type: String }],
-    size: { type: String },
+    size: [{ type: String }],
     color: { type: String },
     price: { type: Number, required: true },
+    inStock: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
