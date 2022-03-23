@@ -33,10 +33,10 @@ productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Delete
-productRouter.delete("/:id", productRouter, async (req, res) => {
+productRouter.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     await ProductModel.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "User deleted" });
+    res.status(200).json({ message: "Product deleted" });
   } catch (err) {
     res.status(500).json(err);
   }
