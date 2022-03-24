@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CartView from "./views/CartView";
@@ -8,7 +9,7 @@ import ProductView from "./views/ProductView";
 import RegisterView from "./views/RegisterView";
 
 const App: React.FC = () => {
-  const user = true;
+  const user = useSelector((state : any)=>state.user.currentUser);
   return (
     <BrowserRouter>
       <Routes>

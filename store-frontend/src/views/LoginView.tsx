@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import styled from "styled-components";
+import { login } from "../redux/apiCalls";
 import { mobails } from "../responsive";
 
 const Container = styled.div`
@@ -45,6 +49,10 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:disabled{
+    color: green,
+    cursor: not-allowed;
+  }
 `;
 const Link = styled.a`
   margin: 5px 0px;
@@ -52,18 +60,38 @@ const Link = styled.a`
   text-decoration: underline;
   cursor: pointer;
 `;
-
+const Error = styled.span`
+  color: red;
+`
 const LoginView: React.FC = () => {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state: any) => state.user);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder="username"></Input>
+          <Input placeholder="username"
+          onChange={(e) => setUsername(e.target.value)}
+          >
 
-          <Input placeholder="password"></Input>
+          </Input>
 
-          <Button>LOGIN</Button>
+          <Input placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+          ></Input>
+
+          <Button onClick={handleClick} disabled={isFetching}>
+            LOGIN
+          </Button>
+          {error && <Error>Something went wrong...</Error>}
           <Link>FORGOT PASSWORD?</Link>
           <Link>CREATE NEW ACCOUNT</Link>
         </Form>
