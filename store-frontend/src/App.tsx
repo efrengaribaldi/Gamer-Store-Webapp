@@ -9,9 +9,7 @@ import ProductView from "./views/ProductView";
 import RegisterView from "./views/RegisterView";
 
 const App: React.FC = () => {
-
-  const user = useSelector((state: any)=>state.user.currentUser);
-
+  const user = useSelector((state : any)=>state.user.currentUser);
   return (
     <BrowserRouter>
       <Routes>
