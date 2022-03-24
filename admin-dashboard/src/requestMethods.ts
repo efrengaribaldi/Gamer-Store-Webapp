@@ -21,10 +21,10 @@ const TOKEN: string = JSON.parse(
 //     .accessToken
 // );
 
-console.log(
-  JSON.parse(JSON.parse(localStorage.getItem("persist:root")!).user).currentUser
-    .isAdmin
-);
+// console.log(
+//   JSON.parse(JSON.parse(localStorage.getItem("persist:root")!).user).currentUser
+//     .isAdmin
+// );
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
 });

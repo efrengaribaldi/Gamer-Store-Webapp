@@ -1,4 +1,5 @@
 import express from "express";
+import Product from "../interfaces/Product";
 import ProductModel from "../models/ProductModel";
 import { verifyTokenAndAdmin } from "./verifyToken";
 
@@ -6,7 +7,7 @@ const productRouter = express.Router();
 
 //Create
 productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
-  const newProduct = new ProductModel(req.body);
+  const newProduct = new ProductModel(req.body.product);
 
   try {
     const savedProduct = await newProduct.save();
@@ -22,7 +23,7 @@ productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     const updatedProduct = await ProductModel.findByIdAndUpdate(
       req.params.id,
       {
-        $set: req.body,
+        $set: req.body.product,
       },
       { new: true }
     );

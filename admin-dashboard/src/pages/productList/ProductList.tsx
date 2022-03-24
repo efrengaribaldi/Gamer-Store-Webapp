@@ -15,7 +15,6 @@ const ProductList: React.FC = () => {
     getProducts(dispatch);
   }, [dispatch]);
   const handleDelete = (id: string | number) => {
-    console.log("FRONTEND: " + id);
     deleteProduct(id, dispatch);
   };
 

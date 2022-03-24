@@ -5,15 +5,31 @@ import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { updateProduct } from "../../redux/apiCalls";
 
 const Product: React.FC = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
+  const [inputs, setInputs] = useState<any>({});
   const productId = location.pathname.split("/")[2];
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setInputs((prev: any) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
 
   const product = useSelector((state: any) =>
     state.product.products.find((product: any) => product._id === productId)
   );
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    await updateProduct(product._id, inputs, dispatch);
+  };
   return (
     <div>
       <Topbar />
@@ -60,28 +76,58 @@ const Product: React.FC = () => {
           <div className="productBottom">
             <form className="productForm">
               <div className="productFormLeft">
-                <label>Product Name</label>
-                <input type="text" placeholder={product.tile} />
+                <label>Image</label>
+                <input
+                  name="img"
+                  type="text"
+                  placeholder={"asd"}
+                  onChange={handleChange}
+                />
+
+                <label>Product Title</label>
+                <input
+                  name="title"
+                  type="text"
+                  placeholder={product.title}
+                  onChange={handleChange}
+                />
                 <label>Product Description</label>
-                <input type="text" placeholder={product.desc} />
+                <input
+                  name="description"
+                  type="text"
+                  placeholder={product.description}
+                  onChange={handleChange}
+                />
                 <label>Price</label>
-                <input type="text" placeholder={product.price} />
+                <input
+                  name="price"
+                  type="number"
+                  placeholder={product.price}
+                  onChange={handleChange}
+                />
                 <label>In Stock</label>
-                <select name="inStock" id="idStock">
+                <select name="inStock" id="idStock" onChange={handleChange}>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
                 </select>
               </div>
-              <div className="productFormRight">
+              {/* <div className="productFormRight">
                 <div className="productUpload">
                   <img src={product.img} alt="" className="productUploadImg" />
                   <label htmlFor="file">
                     <Publish />
                   </label>
                   <input type="file" id="file" style={{ display: "none" }} />
-                </div>
-                <button className="productButton">Update</button>
-              </div>
+               
+               </div> */}
+              <Link to="/products">
+                <button onClick={handleClick} className="productButton">
+                  Update
+                </button>
+              </Link>
+              {/* <button onClick={handleClick} className="productButton">
+                Update
+              </button> */}
             </form>
           </div>
         </div>

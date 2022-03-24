@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   addProductFailure,
@@ -61,7 +62,8 @@ export const updateProduct = async (
 ) => {
   dispatch(updateProductStart());
   try {
-    dispatch(updateProductSuccess({ id, product }));
+    const res = await userRequest.put(`/products/${id}`, { product });
+    dispatch(updateProductSuccess(res.data));
   } catch (err) {
     dispatch(updateProductFailure());
   }
@@ -74,7 +76,6 @@ export const addProduct = async (
   dispatch(addProductStart());
   try {
     const res = await userRequest.post("/products/", { product });
-
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());
