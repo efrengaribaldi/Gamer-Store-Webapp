@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import "./product.css";
 import Chart from "../../components/chart/Chart";
 import { productData } from "../../dummyData";
-import { Publish } from "@material-ui/icons";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,10 +9,21 @@ import { useState } from "react";
 import { updateProduct } from "../../redux/apiCalls";
 
 const Product: React.FC = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
-  const [inputs, setInputs] = useState<any>({});
   const productId = location.pathname.split("/")[2];
+  const product = useSelector((state: any) =>
+    state.product.products.find((product: any) => product._id === productId)
+  );
+
+  const dispatch = useDispatch();
+
+  const [inputs, setInputs] = useState<any>({
+    img: product.img,
+    title: product.title,
+    description: product.description,
+    price: product.price,
+    inStock: product.inStock,
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -23,13 +33,11 @@ const Product: React.FC = () => {
     });
   };
 
-  const product = useSelector((state: any) =>
-    state.product.products.find((product: any) => product._id === productId)
-  );
-
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    await updateProduct(product._id, inputs, dispatch);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    updateProduct(product._id, inputs, dispatch);
   };
+
+  console.log(inputs);
   return (
     <div>
       <Topbar />
@@ -38,9 +46,9 @@ const Product: React.FC = () => {
         <div className="product">
           <div className="productTitleContainer">
             <h1 className="productTitle">Product</h1>
-            <Link to="/newproduct">
+            {/* <Link to="/newproduct">
               <button className="productAddButton">Create</button>
-            </Link>
+            </Link> */}
           </div>
           <div className="productTop">
             <div className="productTopLeft">
@@ -80,7 +88,7 @@ const Product: React.FC = () => {
                 <input
                   name="img"
                   type="text"
-                  placeholder={"asd"}
+                  placeholder={product.img}
                   onChange={handleChange}
                 />
 

@@ -77,6 +77,11 @@ const ProductList: React.FC = () => {
       <div className="container">
         <Sidebar />
         <div className="productList">
+          <Link to="/newproduct">
+            <button style={{ margin: "10px" }} className="productAddButton">
+              Create
+            </button>
+          </Link>
           <DataGrid
             rows={products}
             disableSelectionOnClick

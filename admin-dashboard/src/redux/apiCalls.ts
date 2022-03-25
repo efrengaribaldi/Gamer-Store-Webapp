@@ -1,4 +1,3 @@
-import { useReducer } from "react";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   addProductFailure,

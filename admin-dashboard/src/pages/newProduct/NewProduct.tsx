@@ -1,6 +1,6 @@
-import { ArrowBackIosOutlined } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import { addProduct } from "../../redux/apiCalls";
@@ -10,7 +10,7 @@ const NewProduct: React.FC = () => {
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState<any>({});
   // const [files, setFile] = useState<File>();
-  const [cat, setCat] = useState<string[]>([]);
+  // const [cat, setCat] = useState<string[]>([]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -21,11 +21,10 @@ const NewProduct: React.FC = () => {
   };
 
   const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCat(e.target.value.split(","));
+    // setCat(e.target.value.split(","));
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
     addProduct(inputs, dispatch);
   };
 
@@ -64,7 +63,7 @@ const NewProduct: React.FC = () => {
               <input
                 name="description"
                 type="text"
-                placeholder="description"
+                placeholder="Description"
                 onChange={handleChange}
               />
             </div>
@@ -92,10 +91,11 @@ const NewProduct: React.FC = () => {
                 <option value="false">No</option>
               </select>
             </div>
-
-            <button onClick={handleClick} className="addProductButton">
-              Create
-            </button>
+            <Link to="/products">
+              <button onClick={handleClick} className="addProductButton">
+                Create
+              </button>
+            </Link>
           </form>
         </div>
       </div>

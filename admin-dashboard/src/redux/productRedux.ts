@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AnyArray } from "immer/dist/internal";
 
 export const productSlice = createSlice({
   name: "product",
