@@ -10,7 +10,6 @@ const NewProduct: React.FC = () => {
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState<any>({});
   // const [files, setFile] = useState<File>();
-  // const [cat, setCat] = useState<string[]>([]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -18,10 +17,6 @@ const NewProduct: React.FC = () => {
     setInputs((prev: any) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-  };
-
-  const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setCat(e.target.value.split(","));
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,11 +73,16 @@ const NewProduct: React.FC = () => {
             </div>
             <div className="addProductItem">
               <label>Categories</label>
-              <input
+              <select name="categories" onChange={handleChange}>
+                <option value="pc-parts">PC Parts</option>
+                <option value="pc-cases">PC Cases</option>
+                <option value="pc-add-ons">PC-Add-Ons</option>
+              </select>
+              {/* <input
                 type="text"
                 placeholder="pc-parts,pc-adds-on"
                 onChange={handleCategories}
-              />
+              /> */}
             </div>
             <div className="addProductItem">
               <label>Stock</label>

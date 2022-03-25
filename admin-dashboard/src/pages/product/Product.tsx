@@ -37,7 +37,6 @@ const Product: React.FC = () => {
     updateProduct(product._id, inputs, dispatch);
   };
 
-  console.log(inputs);
   return (
     <div>
       <Topbar />
