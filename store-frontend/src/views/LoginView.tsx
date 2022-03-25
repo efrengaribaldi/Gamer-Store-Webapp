@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import { login } from "../redux/apiCalls";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 const Container = styled.div`
   width: 110v;
@@ -25,6 +25,9 @@ const Wrapper = styled.div`
   background-color: white;
   ${mobails} {
     width: 75%;
+  }
+  ${tablet} {
+    width: 70%;
   }
 `;
 const Title = styled.h1`
@@ -59,13 +62,16 @@ const Link = styled.a`
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
+  ${tablet} {
+    margin-bottom: 10px;
+  }
 `;
 const Error = styled.span`
   color: red;
-`
+`;
 const LoginView: React.FC = () => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state: any) => state.user);
 
@@ -78,14 +84,14 @@ const LoginView: React.FC = () => {
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder="username"
-          onChange={(e) => setUsername(e.target.value)}
-          >
+          <Input
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          ></Input>
 
-          </Input>
-
-          <Input placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
+          <Input
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
           ></Input>
 
           <Button onClick={handleClick} disabled={isFetching}>

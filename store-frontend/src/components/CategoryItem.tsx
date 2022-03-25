@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ICategory from "../interfaces/ICategory";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 const Container = styled.div`
   flex: 1;
@@ -15,6 +15,9 @@ const Image = styled.img`
   object-fit: cover;
   ${mobails} {
     height: 35vh;
+  }
+  ${tablet} {
+    height: 45vh;
   }
 `;
 const Info = styled.div`

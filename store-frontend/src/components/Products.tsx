@@ -35,7 +35,6 @@ interface IProduct {
 }
 
 const Products: React.FC<ProductsProps> = ({ cat, filters, sort }) => {
-  console.log(cat, filters, sort);
   const [products, setProducts] = React.useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = React.useState<IProduct[]>(
     []
@@ -50,9 +49,7 @@ const Products: React.FC<ProductsProps> = ({ cat, filters, sort }) => {
             : "http://localhost:5002/api/products"
         );
         setProducts(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     getProducts();
   }, [cat]);

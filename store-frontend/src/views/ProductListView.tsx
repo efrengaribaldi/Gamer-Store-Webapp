@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 const Container = styled.div``;
 const Title = styled.h1`
@@ -19,11 +19,19 @@ const FilterContainer = styled.div`
   ${mobails} {
     width: 80vw;
   }
+  ${tablet} {
+    width: 80vw;
+  }
 `;
 const Filter = styled.div`
   margin: 20px;
   ${mobails} {
     width: 0px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  ${tablet} {
+    width: 0 30px;
     display: flex;
     flex-direction: column;
   }
@@ -33,6 +41,9 @@ const FilterText = styled.span`
   font-weight: 600;
   margin-right: 20px;
   ${mobails} {
+    margin-right: 0px;
+  }
+  ${tablet} {
     margin-right: 0px;
   }
 `;
