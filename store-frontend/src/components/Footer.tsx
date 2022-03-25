@@ -9,7 +9,7 @@ import {
   Twitter,
 } from "@material-ui/icons";
 import styled from "styled-components";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 interface PropsColor {
   color: string;
@@ -18,6 +18,10 @@ interface PropsColor {
 const Container = styled.div`
   display: flex;
   ${mobails} {
+    flex-direction: column;
+    width: 100%;
+  }
+  ${tablet} {
     flex-direction: column;
     width: 100%;
   }
@@ -81,9 +85,14 @@ const ContactItem = styled.div`
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  ${tablet} {
+  }
 `;
 const Payment = styled.img`
   width: 50%;
+  ${tablet} {
+    display: none;
+  }
 `;
 
 const Footer: React.FC = () => {

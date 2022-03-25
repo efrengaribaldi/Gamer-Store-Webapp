@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 interface Props {
   types: string;
@@ -41,6 +41,9 @@ const TopText = styled.div`
   text-decoration: underline;
   cursor: pointer;
   margin: 0px 10px;
+  ${tablet} {
+    font-size: 14px;
+  }
 `;
 
 const TopButton = styled.button`
@@ -59,6 +62,9 @@ const Bottom = styled.div`
   ${mobails} {
     flex-direction: column;
   }
+  ${tablet} {
+    flex-direction: column;
+  }
 `;
 const Info = styled.div`
   flex: 3;
@@ -69,6 +75,11 @@ const Product = styled.div`
   justify-content: space-between;
   ${mobails} {
     flex-direction: column;
+    margin-bottom: 15px;
+  }
+  ${tablet} {
+    flex-direction: column;
+    margin-bottom: 10px;
   }
 `;
 const ProductDetail = styled.div`
@@ -106,6 +117,12 @@ const ProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  ${mobails} {
+    transform: scale(1.2);
+  }
+  ${tablet} {
+    transform: scale(1.5);
+  }
 `;
 const ProductAmount = styled.div`
   font-size: 24px;
@@ -131,7 +148,7 @@ const Summary = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
-  height: 50vh;
+  height: 70vh;
 `;
 const SummaryTitle = styled.h1`
   font-weight: 200;

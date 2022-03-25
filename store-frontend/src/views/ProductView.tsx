@@ -4,7 +4,7 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 interface PropsColor {
   color: string;
@@ -19,6 +19,9 @@ const Wrapper = styled.div`
     padding: 10px;
     flex-direction: column;
   }
+  ${tablet} {
+    flex-direction: column;
+  }
 `;
 const ImgContainer = styled.div`
   flex: 1;
@@ -30,11 +33,17 @@ const Image = styled.img`
   ${mobails} {
     height: 75%;
   }
+  ${tablet} {
+    height: 80%;
+  }
 `;
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
   ${mobails} {
+    padding: 10px;
+  }
+  ${tablet} {
     padding: 10px;
   }
 `;
@@ -54,6 +63,9 @@ const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   ${mobails} {
+    width: 100%;
+  }
+  ${tablet} {
     width: 100%;
   }
 `;
@@ -79,6 +91,9 @@ const AddContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   ${mobails} {
+    width: 100%;
+  }
+  ${tablet} {
     width: 100%;
   }
 `;

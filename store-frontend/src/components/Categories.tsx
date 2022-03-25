@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { categories } from "../data";
 import CategoryItem from "./CategoryItem";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 const Container = styled.div`
   display: flex;
@@ -10,6 +10,11 @@ const Container = styled.div`
 
   ${mobails} {
     padding: 0;
+    flex-direction: column;
+  }
+
+  ${tablet} {
+    padding: 5px;
     flex-direction: column;
   }
 `;

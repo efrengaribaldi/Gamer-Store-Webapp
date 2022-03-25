@@ -1,6 +1,7 @@
 import { Send } from "@material-ui/icons";
+import { table } from "console";
 import styled from "styled-components";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 const Container = styled.div`
   height: 60vh;
@@ -10,7 +11,12 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   ${mobails} {
-    width: 100%;
+    width: 95%;
+    margin: 0px 5px;
+  }
+  ${tablet} {
+    width: 95%;
+    margin: 0px 20px;
   }
 `;
 const Title = styled.h1`
@@ -18,6 +24,9 @@ const Title = styled.h1`
   margin-bottom: 20px;
   ${mobails} {
     font-size: 40px;
+  }
+  ${tablet} {
+    font-size: 50px;
   }
 `;
 const Description = styled.div`
@@ -27,6 +36,11 @@ const Description = styled.div`
 
   ${mobails} {
     text-align: center;
+    font-size: 16px;
+    margin: 0 10px;
+  }
+  ${tablet} {
+    font-size: 20px;
   }
 `;
 const InputContainer = styled.div`
@@ -37,7 +51,7 @@ const InputContainer = styled.div`
   justify-content: space-between;
   border: 1px solid lightgray;
   ${mobails} {
-    width: 80%;
+    width: 70%;
   }
 `;
 const Input = styled.input`
