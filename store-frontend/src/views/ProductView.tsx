@@ -1,9 +1,15 @@
 import { Add, Remove } from "@material-ui/icons";
+import React from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
+import { addProduct } from "../redux/cartRedux";
+import { publicRequest } from "../requestMethods";
+import { useDispatch } from "react-redux";
 import { mobails, tablet } from "../responsive";
 
 interface PropsColor {
@@ -124,7 +130,46 @@ const Button = styled.button`
   }
 `;
 
+interface IProduct {
+  _id: string;
+  title: string;
+  description: string;
+  img: string;
+  categories: string[];
+  type: string;
+  color: string;
+  price: number;
+  inStock: boolean;
+  createdAt: Date;
+}
+
 const ProductView: React.FC = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [product, setProduct] = React.useState<IProduct>();
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  }, [id]);
+
+  const handleQuantity = (type: string) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else if (type === "inc") {
+      setQuantity(quantity + 1);
+    }
+  };
+  const handleClick = () => {
+    //update cart
+    dispatch(addProduct({ ...product, quantity }));
+  };
   return (
     <Container>
       <Navbar />
@@ -132,17 +177,12 @@ const ProductView: React.FC = () => {
 
       <Wrapper>
         <ImgContainer>
-          <Image src="https://m.media-amazon.com/images/I/71eXWvF3bEL._AC_SS450_.jpg" />
+          <Image src={product?.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Razer Mouse</Title>
-          <Desc>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
-            suscipit itaque. Voluptates, similique. Ullam voluptatem ab fuga
-            nesciunt ex officia quis, facere, eos doloribus repellat est earum
-            vero corporis. Quae.
-          </Desc>
-          <Price>$ 59</Price>
+          <Title>{product?.title}</Title>
+          <Desc>{product?.description}</Desc>
+          <Price>$ {product?.price}</Price>
 
           <FilterContainer>
             <Filter>
@@ -155,11 +195,11 @@ const ProductView: React.FC = () => {
 
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={() => handleQuantity("dec")} />
+              <Amount>{quantity}</Amount>
+              <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

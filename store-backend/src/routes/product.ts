@@ -1,4 +1,5 @@
 import express from "express";
+import Product from "../interfaces/Product";
 import ProductModel from "../models/ProductModel";
 import { verifyTokenAndAdmin } from "./verifyToken";
 
@@ -6,7 +7,7 @@ const productRouter = express.Router();
 
 //Create
 productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
-  const newProduct = new ProductModel(req.body);
+  const newProduct = new ProductModel(req.body.product);
 
   try {
     const savedProduct = await newProduct.save();
@@ -22,7 +23,7 @@ productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     const updatedProduct = await ProductModel.findByIdAndUpdate(
       req.params.id,
       {
-        $set: req.body,
+        $set: req.body.product,
       },
       { new: true }
     );
@@ -33,14 +34,14 @@ productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Delete
-productRouter.delete("/:id", productRouter, async (req, res) => {
-    try {
-      await ProductModel.findByIdAndDelete(req.params.id);
-      res.status(200).json({ message: "User deleted" });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+productRouter.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    await ProductModel.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Product deleted" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //Get Product
 productRouter.get("/find/:id", async (req, res) => {
@@ -64,7 +65,7 @@ productRouter.get("/", async (req, res) => {
         .limit(5);
     } else if (qCategory) {
       products = await ProductModel.find({
-        category: {
+        categories: {
           $in: [qCategory],
         },
       }).sort({ createdAt: -1 });
@@ -76,7 +77,5 @@ productRouter.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
 
 export default productRouter;

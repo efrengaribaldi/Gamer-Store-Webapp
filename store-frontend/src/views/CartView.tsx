@@ -1,4 +1,5 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -171,6 +172,7 @@ const Button = styled.button`
 `;
 
 const CartView: React.FC = () => {
+  const cart = useSelector((state: any) =>state.cart)
   return (
     <Container>
       <Navbar />
@@ -188,59 +190,41 @@ const CartView: React.FC = () => {
         </Top>
         <Bottom>
           <Info>
+            {cart.products.map((product: any)=>(
+
             <Product>
               <ProductDetail>
-                <Image src="https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                <Image src={product.img} />
                 <Details>
                   <ProductName>
-                    <b>Product: </b>GAMER KEYBOARD
+                    <b>Product: </b>{product.title}
                   </ProductName>
                   <ProductId>
-                    <b>ID: </b>146516516
+                    <b>ID: </b>{product._id}
                   </ProductId>
-                  <ProductColor colors="black" />
+                  <ProductColor colors={product.color} />
                 </Details>
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
                   <Remove />
-                  <ProductAmount>2</ProductAmount>
+                  <ProductAmount>{product.quantity}</ProductAmount>
                   <Add />
                 </ProductAmountContainer>
-                <ProductPrice>$250</ProductPrice>
+                <ProductPrice>$ {product.price*product.quantity}</ProductPrice>
               </PriceDetail>
             </Product>
+          ))}
 
             <Hr />
 
-            <Product>
-              <ProductDetail>
-                <Image src="https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                <Details>
-                  <ProductName>
-                    <b>Product: </b>GAMER KEYBOARD
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b>146516516
-                  </ProductId>
-                  <ProductColor colors="black" />
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Remove />
-                  <ProductAmount>2</ProductAmount>
-                  <Add />
-                </ProductAmountContainer>
-                <ProductPrice>$250</ProductPrice>
-              </PriceDetail>
-            </Product>
+            
           </Info>
           <Summary>
             <SummaryTitle>ORDER CHECKOUT</SummaryTitle>
             <SummaryItem types="not">
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$440</SummaryItemPrice>
+              <SummaryItemPrice>${cart.total}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem types="not">
               <SummaryItemText>Shipping</SummaryItemText>
@@ -252,7 +236,7 @@ const CartView: React.FC = () => {
             </SummaryItem>
             <SummaryItem types="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>-$464.01</SummaryItemPrice>
+              <SummaryItemPrice>${cart.total}</SummaryItemPrice>
             </SummaryItem>
 
             <Button>CHECKOUT NOW</Button>

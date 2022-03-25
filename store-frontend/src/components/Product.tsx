@@ -3,6 +3,8 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 import IPopularProduct from "../interfaces/IPopularProduct";
 
@@ -66,7 +68,12 @@ const Icon = styled.div`
   }
 `;
 
-const Product: React.FC<IPopularProduct> = ({ id, img }) => {
+interface ProductProps {
+  id: string;
+  img: string;
+}
+
+const Product: React.FC<ProductProps> = ({ id, img }) => {
   return (
     <Container>
       <Circle />
@@ -76,7 +83,9 @@ const Product: React.FC<IPopularProduct> = ({ id, img }) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <SearchOutlined />
+          <Link to={`/product/${id}`}>
+            <SearchOutlined />
+          </Link>
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />

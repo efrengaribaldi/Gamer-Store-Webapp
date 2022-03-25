@@ -31,16 +31,19 @@ export const categories: ICategory[] = [
     id: 1,
     img: "https://subgurim.net/imagenes/las-mejores-memorias-ram-para-pc.jpg",
     title: "PC PARTS",
+    cat: "pc-parts",
   },
   {
     id: 2,
     img: "https://images10.newegg.com/NeweggImage/ProductImage/11-147-292-V10.jpg",
     title: "PC CASES",
+    cat: "pc-cases",
   },
   {
     id: 3,
     img: "https://assets2.razerzone.com/images/pnx.assets/1015a075bd6fcb7c4b3e2681cd6ab88c/razer-deathadder-v2-halo-gallery-1.jpg",
     title: "PC ADD-ONS",
+    cat: "pc-add-ons",
   },
 ];
 
