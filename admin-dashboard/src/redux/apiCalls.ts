@@ -3,6 +3,12 @@ import {
   getAccountFailure,
   getAccountStart,
   getAccountSuccess,
+  addAccountStart,
+  addAccountFailure,
+  addAccountSuccess,
+  deleteAccountStart,
+  deleteAccountSuccess,
+  deleteAccountFailure,
 } from "./accountRedux";
 import {
   addProductFailure,
@@ -42,6 +48,32 @@ export const getAccounts = async (
     dispatch(getAccountSuccess(res.data));
   } catch (err) {
     dispatch(getAccountFailure());
+  }
+};
+
+export const addAccount = async (
+  user: any,
+  dispatch: (arg0: { payload: any; type: string }) => void
+) => {
+  dispatch(addAccountStart());
+  try {
+    const res = await userRequest.post("/users/", { user });
+    dispatch(addAccountSuccess(res.data));
+  } catch (err) {
+    dispatch(addAccountFailure());
+  }
+};
+
+export const deleteAccount = async (
+  id: any,
+  dispatch: (arg0: { payload: any; type: string }) => void
+) => {
+  dispatch(deleteAccountStart());
+  try {
+    await userRequest.delete(`/users/${id}`);
+    dispatch(deleteAccountSuccess(id));
+  } catch (err) {
+    dispatch(deleteAccountFailure());
   }
 };
 

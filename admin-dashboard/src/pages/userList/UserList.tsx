@@ -6,7 +6,7 @@ import { ReactChild, ReactFragment, ReactPortal, useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import { useDispatch, useSelector } from "react-redux";
-import { getAccounts } from "../../redux/apiCalls";
+import { getAccounts, deleteAccount } from "../../redux/apiCalls";
 
 const UserList: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,9 @@ const UserList: React.FC = () => {
     getAccounts(dispatch);
   }, [dispatch]);
 
-  const handleDelete = (id: number) => {};
+  const handleDelete = (id: string | number) => {
+    deleteAccount(id, dispatch);
+  };
 
   const columns: any = [
     { field: "_id", headerName: "ID", width: 90 },
@@ -61,12 +63,12 @@ const UserList: React.FC = () => {
       renderCell: (params: { row: { _id: string | number } }) => {
         return (
           <>
-            <Link to={"/user/" + params.row._id}>
+            {/* <Link to={"/user/" + params.row._id}>
               <button className="userListEdit">Edit</button>
-            </Link>
+            </Link> */}
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(Number(params.row._id))}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -80,6 +82,12 @@ const UserList: React.FC = () => {
       <div className="container">
         <Sidebar />
         <div className="userList">
+          {/*boton aqui*/}
+          <Link to="/newUser">
+            <button style={{ margin: "10px" }} className="userAddButton">
+              Create
+            </button>
+          </Link>
           <DataGrid
             rows={accounts}
             disableSelectionOnClick
