@@ -1,5 +1,10 @@
 import { publicRequest, userRequest } from "../requestMethods";
 import {
+  getAccountFailure,
+  getAccountStart,
+  getAccountSuccess,
+} from "./accountRedux";
+import {
   addProductFailure,
   addProductStart,
   addProductSuccess,
@@ -25,6 +30,18 @@ export const login = async (
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
+  }
+};
+
+export const getAccounts = async (
+  dispatch: (arg0: { payload: any; type: string }) => void
+) => {
+  dispatch(getAccountStart());
+  try {
+    const res = await userRequest.get("/users");
+    dispatch(getAccountSuccess(res.data));
+  } catch (err) {
+    dispatch(getAccountFailure());
   }
 };
 
