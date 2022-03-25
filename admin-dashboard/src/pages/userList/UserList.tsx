@@ -47,15 +47,11 @@ const UserList: React.FC = () => {
     },
     { field: "email", headerName: "Email", width: 200 },
     {
-      field: "status",
-      headerName: "Status",
-      width: 120,
+      field: "isAdmin",
+      headerName: "isAdmin",
+      width: 170,
     },
-    {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
-    },
+
     {
       field: "action",
       headerName: "Action",
