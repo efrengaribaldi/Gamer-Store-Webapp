@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 const Container = styled.div`
   width: 110v;
@@ -29,6 +29,9 @@ const Wrapper = styled.div`
     padding: 0;
     position: relative;
   }
+  ${tablet} {
+    width: 80%;
+  }
 `;
 const Title = styled.h1`
   font-size: 12px;
@@ -41,6 +44,9 @@ const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
   ${mobails} {
+    flex-direction: column;
+  }
+  ${tablet} {
     flex-direction: column;
   }
 `;
@@ -63,6 +69,9 @@ const Button = styled.button`
   cursor: pointer;
   ${mobails} {
     width: 75%;
+  }
+  ${tablet} {
+    width: 80%;
   }
 `;
 

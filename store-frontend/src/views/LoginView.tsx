@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 const Container = styled.div`
   width: 110v;
@@ -21,6 +21,9 @@ const Wrapper = styled.div`
   background-color: white;
   ${mobails} {
     width: 75%;
+  }
+  ${tablet} {
+    width: 70%;
   }
 `;
 const Title = styled.h1`
@@ -51,6 +54,9 @@ const Link = styled.a`
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
+  ${tablet} {
+    margin-bottom: 10px;
+  }
 `;
 
 const LoginView: React.FC = () => {
