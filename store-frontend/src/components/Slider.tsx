@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled, { StyledFunction } from "styled-components";
 import { sliderItems } from "../data";
 import { mobails, tablet } from "../responsive";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   direct: string;
@@ -103,6 +104,12 @@ const Slider: React.FC = () => {
       setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
     }
   };
+  let navigate = useNavigate();
+  const routeChange = (path: string) => {
+    path = `/products/${path}`;
+    navigate(path);
+  };
+
   return (
     <Container>
       <Arrow direct="left" onClick={() => handleClick("left")}>
@@ -117,7 +124,7 @@ const Slider: React.FC = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
+              <Button onClick={() => routeChange(item.cat)}>SHOW NOW</Button>
             </InfoContainer>
           </Slide>
         ))}

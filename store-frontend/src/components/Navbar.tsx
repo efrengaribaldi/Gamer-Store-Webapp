@@ -116,11 +116,6 @@ const Navbar: React.FC = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Language>EN</Language>
-          <SearchContainger>
-            <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
-          </SearchContainger>
         </Left>
         <Center>
           <Link to="/" style={{ color: 'black',textDecoration: 'none',  }}>

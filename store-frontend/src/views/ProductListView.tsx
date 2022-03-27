@@ -1,11 +1,10 @@
 import { red } from "@mui/material/colors";
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import { mobails, tablet } from "../responsive";
 
@@ -96,9 +95,9 @@ const ProductListView: React.FC = () => {
           </Select>
           <Select name="type" onChange={handleFilters}>
             <Option disabled>Type</Option>
-            <Option>pc-parts</Option>
-            <Option>pc-cases</Option>
-            <Option>pc-add-ons</Option>
+            <Option value="pc-parts">pc-parts</Option>
+            <Option value="pc-cases">pc-cases</Option>
+            <Option value="pc-add-ons">pc-add-ons</Option>
           </Select>
         </Filter>
         <Filter>
@@ -111,8 +110,7 @@ const ProductListView: React.FC = () => {
         </Filter>
       </FilterContainer>
 
-      <Products cat={cat} filters={filters} sort={sort} />
-      <Newsletter />
+      <Products cat={filters.type as string} filters={filters} sort={sort} />
       <Footer />
     </Container>
   );

@@ -8,6 +8,7 @@ import {
   Room,
   Twitter,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobails, tablet } from "../responsive";
 
@@ -101,10 +102,8 @@ const Footer: React.FC = () => {
       <Left>
         <Logo>GAME-STORE</Logo>
         <Desc>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore,
-          eaque ipsa! Eum non repudiandae dolorum provident? Officiis eaque
-          impedit laudantium tempora, adipisci incidunt. Distinctio corrupti at
-          consequatur recusandae, iure labore?
+          Your online gaming store. We have the best and latest PC hardware for
+          your gaming needs. Check out our catalog.
         </Desc>
         <SocialContainer>
           <SoacialIcon color="3B5999">
@@ -127,15 +126,21 @@ const Footer: React.FC = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>PC Parts</ListItem>
-          <ListItem>PC Cases</ListItem>
-          <ListItem>PC Add-ons</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
+          <ListItem>
+            <Link to="/">Home</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/cart">Cart </Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/products/pc-parts">PC Parts </Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/products/pc-cases">PC Cases </Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/products/pc-add-ons">PC Add-ons </Link>
+          </ListItem>
         </List>
       </Center>
       <Right>
