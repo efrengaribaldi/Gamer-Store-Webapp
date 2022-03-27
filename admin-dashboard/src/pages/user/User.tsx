@@ -11,7 +11,11 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import "./user.css";
 
-const User: React.FC = () => {
+interface UserProps {
+  // username: string | undefined;
+}
+
+const User: React.FC<UserProps> = () => {
   return (
     <div>
       <Topbar />

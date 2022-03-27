@@ -8,7 +8,9 @@ import Topbar from "../../components/topbar/Topbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccounts, deleteAccount } from "../../redux/apiCalls";
 
-const UserList: React.FC = () => {
+interface UserListProps {}
+
+const UserList: React.FC<UserListProps> = () => {
   const dispatch = useDispatch();
   const accounts = useSelector((state: any) => state.account.accounts);
   useEffect(() => {

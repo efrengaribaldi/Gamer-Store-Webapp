@@ -6,7 +6,11 @@ import Topbar from "../../components/topbar/Topbar";
 import { addAccount } from "../../redux/apiCalls";
 import "./newUser.css";
 
-const NewUser: React.FC = () => {
+interface NewUserProps {
+  // username: string | undefined;
+}
+
+const NewUser: React.FC<NewUserProps> = () => {
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState<any>({});
 
@@ -18,9 +22,10 @@ const NewUser: React.FC = () => {
     });
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    addAccount(inputs, dispatch);
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    await addAccount(inputs, dispatch);
   };
+  console.log(inputs);
 
   return (
     <div>
@@ -62,7 +67,6 @@ const NewUser: React.FC = () => {
               <select
                 name="isAdmin"
                 className="newUserSelect"
-                id="active"
                 onChange={handleChange}
               >
                 <option value="true">Yes</option>

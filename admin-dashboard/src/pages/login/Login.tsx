@@ -3,8 +3,11 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/apiCalls";
 
-// TODO: Access login not working
-const Login: React.FC = () => {
+interface LoginProps {
+  // username: string | undefined;
+}
+
+const Login: React.FC<LoginProps> = () => {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
@@ -29,6 +32,8 @@ const Login: React.FC = () => {
         justifyContent: "center",
       }}
     >
+      <h2 style={{ padding: 10 }}>Login admin</h2>
+
       <input
         style={{ padding: 10, marginBottom: 20 }}
         type="text"

@@ -24,7 +24,14 @@ import {
   updateProductStart,
   updateProductSuccess,
 } from "./productRedux";
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logoutFailure,
+  logoutStart,
+  logoutSuccess,
+} from "./userRedux";
 
 export const login = async (
   dispatch: (arg0: { payload: any; type: string }) => void,
@@ -36,6 +43,18 @@ export const login = async (
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
+    return err;
+  }
+};
+
+export const logout = async (
+  dispatch: (arg0: { payload: any; type: string }) => void
+) => {
+  dispatch(logoutStart());
+  try {
+    dispatch(logoutSuccess());
+  } catch (err) {
+    dispatch(logoutFailure());
     return err;
   }
 };
@@ -58,7 +77,7 @@ export const addAccount = async (
 ) => {
   dispatch(addAccountStart());
   try {
-    const res = await userRequest.post("/users/", { user });
+    const res = await userRequest.post("/auth/register", { user });
     dispatch(addAccountSuccess(res.data));
   } catch (err) {
     dispatch(addAccountFailure());
