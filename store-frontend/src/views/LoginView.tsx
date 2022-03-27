@@ -91,6 +91,7 @@ const LoginView: React.FC = () => {
 
           <Input
             placeholder="password"
+            type={'password'}
             onChange={(e) => setPassword(e.target.value)}
           ></Input>
 

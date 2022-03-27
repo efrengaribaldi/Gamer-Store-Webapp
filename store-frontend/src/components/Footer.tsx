@@ -3,13 +3,14 @@ import {
   Facebook,
   GitHub,
   Instagram,
-  LinkedIn,
   PhoneEnabled,
   Room,
   Twitter,
 } from "@material-ui/icons";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobails, tablet } from "../responsive";
+import Button from "@mui/material/Button";
 
 interface PropsColor {
   color: string;
@@ -96,15 +97,14 @@ const Payment = styled.img`
 `;
 
 const Footer: React.FC = () => {
+  let navigate = useNavigate();
   return (
     <Container>
       <Left>
         <Logo>GAME-STORE</Logo>
         <Desc>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore,
-          eaque ipsa! Eum non repudiandae dolorum provident? Officiis eaque
-          impedit laudantium tempora, adipisci incidunt. Distinctio corrupti at
-          consequatur recusandae, iure labore?
+          Your online gaming store. We have the best and latest PC hardware for
+          your gaming needs. Check out our catalog.
         </Desc>
         <SocialContainer>
           <SoacialIcon color="3B5999">
@@ -127,15 +127,36 @@ const Footer: React.FC = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>PC Parts</ListItem>
-          <ListItem>PC Cases</ListItem>
-          <ListItem>PC Add-ons</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
+          <ListItem>
+            <Button
+              variant="text"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Home
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button
+              variant="text"
+              onClick={() => {
+                navigate("/cart");
+              }}
+            >
+              Cart
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button
+              variant="text"
+              onClick={() => {
+                navigate("/products", { state: "pc-parts" });
+              }}
+            >
+              Products
+            </Button>
+          </ListItem>
         </List>
       </Center>
       <Right>

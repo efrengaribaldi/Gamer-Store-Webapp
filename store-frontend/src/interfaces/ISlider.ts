@@ -4,4 +4,5 @@ export default interface ISlider {
   img: string;
   desc: string;
   bg: string;
+  cat: string;
 }

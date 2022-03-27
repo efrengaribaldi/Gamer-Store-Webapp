@@ -1,9 +1,11 @@
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { ShoppingCartOutlined } from "@material-ui/icons";
+import { Button } from "@mui/material";
 import Badge from "@mui/material/Badge";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
+import { logout } from "../redux/apiCalls";
 
 import { mobails, tablet } from "../responsive";
 
@@ -27,37 +29,6 @@ const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-`;
-
-const Language = styled.span`
-  font-size: 14px;
-  cursor: pointer;
-  ${mobails} {
-    display: none;
-  }
-`;
-const SearchContainger = styled.div`
-  border: 0.5px solid lightgray;
-  display: flex;
-  align-items: center;
-  margin-left: 25px;
-  padding: 5px;
-  ${mobails} {
-    padding-left: 0;
-  }
-  ${tablet} {
-    padding-left: 0;
-  }
-`;
-
-const Input = styled.input`
-  border: none;
-  ${mobails} {
-    width: 50px;
-  }
-  ${tablet} {
-    width: 60px;
-  }
 `;
 
 const Center = styled.div`
@@ -111,29 +82,43 @@ const MenuItem = styled.div`
 
 const Navbar: React.FC = () => {
   const quantity = useSelector((state: any) => state.cart.quantity);
+  const currentUser = useSelector((state: any) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      await logout(dispatch);
+      localStorage.removeItem("persist:root");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Container>
       <Wrapper>
-        <Left>
-          <Language>EN</Language>
-          <SearchContainger>
-            <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
-          </SearchContainger>
-        </Left>
+        <Left></Left>
         <Center>
-          <Link to="/" style={{ color: 'black',textDecoration: 'none',  }}>
-          <Logo>Gamer-Store</Logo>
+          <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+            <Logo>Gamer-Store</Logo>
           </Link>
         </Center>
         <Right>
-          <Link to="/register">
-          <MenuItem>REGISTER</MenuItem>
-          </Link>
-          <Link to="/login">
-          <MenuItem>SIGN IN</MenuItem>
-          </Link>
+          {!currentUser ? (
+            <>
+              <Link to="/register">
+                <MenuItem>REGISTER</MenuItem>
+              </Link>
+              <Link to="/login">
+                <MenuItem>SIGN IN</MenuItem>
+              </Link>
+            </>
+          ) : (
+            <Button onClick={handleClick}>Logout</Button>
+          )}
+
           <Link to="/cart">
             <MenuItem>
               <Badge badgeContent={quantity} color="primary">

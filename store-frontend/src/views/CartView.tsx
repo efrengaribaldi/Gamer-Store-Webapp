@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { deleteProduct } from "../redux/apiCalls";
+import { removeProduct } from "../redux/cartRedux";
 import { mobails, tablet } from "../responsive";
 
 interface Props {
@@ -177,6 +179,9 @@ const CartView: React.FC = () => {
   const items = useSelector((state: any) => state.cart.quantity);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const handleDelete = (product: any) => {
+    deleteProduct(product, dispatch);
+  };
 
   return (
     <Container>
@@ -188,14 +193,13 @@ const CartView: React.FC = () => {
           <TopButton types="notFilled">KEEP SEARCHING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag ({items})</TopText>
-            <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
 
           <TopButton types="filled">BUY NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product: any) => (
+            {cart.products.map((product: any, index: number) => (
               <Product>
                 <ProductDetail>
                   <Image src={product.img} />
@@ -213,9 +217,8 @@ const CartView: React.FC = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Remove />
+                    <Button onClick={() => handleDelete({...product, index})}>Remove</Button>
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Add />
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.price * product.quantity}
@@ -234,11 +237,11 @@ const CartView: React.FC = () => {
             </SummaryItem>
             <SummaryItem types="not">
               <SummaryItemText>Shipping</SummaryItemText>
-              <SummaryItemPrice>$30</SummaryItemPrice>
+              <SummaryItemPrice>$0</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem types="not">
               <SummaryItemText>Discount</SummaryItemText>
-              <SummaryItemPrice>-$15.99</SummaryItemPrice>
+              <SummaryItemPrice>$0</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem types="total">
               <SummaryItemText>Total</SummaryItemText>

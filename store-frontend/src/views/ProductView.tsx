@@ -1,12 +1,10 @@
 import { Add, Remove } from "@material-ui/icons";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
 import { addProduct } from "../redux/cartRedux";
 import { publicRequest } from "../requestMethods";
 import { useDispatch } from "react-redux";
@@ -166,10 +164,12 @@ const ProductView: React.FC = () => {
       setQuantity(quantity + 1);
     }
   };
+
   const handleClick = () => {
     //update cart
     dispatch(addProduct({ ...product, quantity }));
   };
+
   return (
     <Container>
       <Navbar />
@@ -203,7 +203,6 @@ const ProductView: React.FC = () => {
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Newsletter />
       <Footer />
     </Container>
   );
