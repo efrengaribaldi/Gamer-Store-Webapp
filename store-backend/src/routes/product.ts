@@ -56,21 +56,39 @@ productRouter.get("/find/:id", async (req, res) => {
 //Get All Products
 productRouter.get("/", async (req, res) => {
   const qNew = req.query.new;
-  const qCategory = req.query.category;
+  const qSort = req.query.sort;
+  const qColor = req.query.color;
+  const qType = req.query.type;
+  const query: any = {};
+  let sort = {};
+  if (qColor) {
+    query["color"] = qColor;
+  }
+  if (qType) {
+    query["type"] = qType;
+  }
+  if (qNew) {
+    query["new"] = true;
+  }
   try {
     let products;
-    if (qNew) {
+    switch (qSort) {
+      case "asc":
+        sort = { price: 1 };
+        break;
+      case "desc":
+        sort = { price: -1 };
+        break;
+      default:
+        sort = { createdAt: -1 };
+        break;
+    }
+    if (query["new"]) {
       products = await ProductModel.find({ new: true })
         .sort({ createdAt: -1 })
         .limit(5);
-    } else if (qCategory) {
-      products = await ProductModel.find({
-        categories: {
-          $in: [qCategory],
-        },
-      }).sort({ createdAt: -1 });
     } else {
-      products = await ProductModel.find();
+      products = await ProductModel.find(query).sort(sort);
     }
     res.status(200).json(products);
   } catch (err) {
