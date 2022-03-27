@@ -9,8 +9,8 @@ import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { addProduct } from "../redux/cartRedux";
 import { publicRequest } from "../requestMethods";
-import { mobails } from "../responsive";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
+import { mobails, tablet } from "../responsive";
 
 interface PropsColor {
   color: string;
@@ -25,6 +25,9 @@ const Wrapper = styled.div`
     padding: 10px;
     flex-direction: column;
   }
+  ${tablet} {
+    flex-direction: column;
+  }
 `;
 const ImgContainer = styled.div`
   flex: 1;
@@ -36,11 +39,17 @@ const Image = styled.img`
   ${mobails} {
     height: 75%;
   }
+  ${tablet} {
+    height: 80%;
+  }
 `;
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
   ${mobails} {
+    padding: 10px;
+  }
+  ${tablet} {
     padding: 10px;
   }
 `;
@@ -60,6 +69,9 @@ const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   ${mobails} {
+    width: 100%;
+  }
+  ${tablet} {
     width: 100%;
   }
 `;
@@ -85,6 +97,9 @@ const AddContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   ${mobails} {
+    width: 100%;
+  }
+  ${tablet} {
     width: 100%;
   }
 `;
@@ -129,50 +144,44 @@ interface IProduct {
 }
 
 const ProductView: React.FC = () => {
-  const location = useLocation()
-  const id = location.pathname.split("/")[2] 
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
   const [product, setProduct] = React.useState<IProduct>();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   useEffect(() => {
     const getProduct = async () => {
-      try{
-        const res = await publicRequest.get("/products/find/" + id)
-        setProduct(res.data)
-      }
-      catch{
-
-      }
-    }
-    getProduct()
-  },[id])
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  }, [id]);
 
   const handleQuantity = (type: string) => {
-    if(type === "dec"){
-      quantity > 1 && setQuantity(quantity - 1)
-    }else if (type === "inc"){
-      setQuantity(quantity + 1)
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else if (type === "inc") {
+      setQuantity(quantity + 1);
     }
-  }
+  };
   const handleClick = () => {
     //update cart
-    dispatch(addProduct({...product, quantity}))
-    
-  }
+    dispatch(addProduct({ ...product, quantity }));
+  };
   return (
     <Container>
       <Navbar />
       <Announcement />
 
-      <Wrapper> 
+      <Wrapper>
         <ImgContainer>
           <Image src={product?.img} />
         </ImgContainer>
         <InfoContainer>
           <Title>{product?.title}</Title>
-          <Desc>
-          {product?.description}
-          </Desc>
+          <Desc>{product?.description}</Desc>
           <Price>$ {product?.price}</Price>
 
           <FilterContainer>
@@ -186,9 +195,9 @@ const ProductView: React.FC = () => {
 
           <AddContainer>
             <AmountContainer>
-              <Remove onClick={()=> handleQuantity("dec")} />
+              <Remove onClick={() => handleQuantity("dec")} />
               <Amount>{quantity}</Amount>
-              <Add onClick={()=> handleQuantity("inc")} />
+              <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
             <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>

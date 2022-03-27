@@ -1,5 +1,16 @@
 import { publicRequest, userRequest } from "../requestMethods";
 import {
+  getAccountFailure,
+  getAccountStart,
+  getAccountSuccess,
+  addAccountStart,
+  addAccountFailure,
+  addAccountSuccess,
+  deleteAccountStart,
+  deleteAccountSuccess,
+  deleteAccountFailure,
+} from "./accountRedux";
+import {
   addProductFailure,
   addProductStart,
   addProductSuccess,
@@ -25,6 +36,45 @@ export const login = async (
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
+    return err;
+  }
+};
+
+export const getAccounts = async (
+  dispatch: (arg0: { payload: any; type: string }) => void
+) => {
+  dispatch(getAccountStart());
+  try {
+    const res = await userRequest.get("/users");
+    dispatch(getAccountSuccess(res.data));
+  } catch (err) {
+    dispatch(getAccountFailure());
+  }
+};
+
+export const addAccount = async (
+  user: any,
+  dispatch: (arg0: { payload: any; type: string }) => void
+) => {
+  dispatch(addAccountStart());
+  try {
+    const res = await userRequest.post("/users/", { user });
+    dispatch(addAccountSuccess(res.data));
+  } catch (err) {
+    dispatch(addAccountFailure());
+  }
+};
+
+export const deleteAccount = async (
+  id: any,
+  dispatch: (arg0: { payload: any; type: string }) => void
+) => {
+  dispatch(deleteAccountStart());
+  try {
+    await userRequest.delete(`/users/${id}`);
+    dispatch(deleteAccountSuccess(id));
+  } catch (err) {
+    dispatch(deleteAccountFailure());
   }
 };
 
@@ -46,9 +96,8 @@ export const deleteProduct = async (
 ) => {
   dispatch(deleteProductStart());
   try {
-    const res = await userRequest.delete(`/products/${id}`);
-
-    dispatch(deleteProductSuccess(res));
+    await userRequest.delete(`/products/${id}`);
+    dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(deleteProductFailure());
   }
@@ -61,7 +110,8 @@ export const updateProduct = async (
 ) => {
   dispatch(updateProductStart());
   try {
-    dispatch(updateProductSuccess({ id, product }));
+    const res = await userRequest.put(`/products/${id}`, { product });
+    dispatch(updateProductSuccess(res.data));
   } catch (err) {
     dispatch(updateProductFailure());
   }
@@ -74,7 +124,6 @@ export const addProduct = async (
   dispatch(addProductStart());
   try {
     const res = await userRequest.post("/products/", { product });
-
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());

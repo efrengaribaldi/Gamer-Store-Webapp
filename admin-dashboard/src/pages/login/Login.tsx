@@ -1,15 +1,22 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/apiCalls";
 
 // TODO: Access login not working
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const dispatch = useDispatch();
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    try {
+      await login(dispatch, { username, password });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { mobails } from "../responsive";
+import { mobails, tablet } from "../responsive";
 
 const Container = styled.div`
   height: 60px;
@@ -45,6 +45,9 @@ const SearchContainger = styled.div`
   ${mobails} {
     padding-left: 0;
   }
+  ${tablet} {
+    padding-left: 0;
+  }
 `;
 
 const Input = styled.input`
@@ -52,17 +55,26 @@ const Input = styled.input`
   ${mobails} {
     width: 50px;
   }
+  ${tablet} {
+    width: 60px;
+  }
 `;
 
 const Center = styled.div`
   flex: 1;
   text-align: center;
+  ${tablet} {
+    flex: 0;
+  }
 `;
 
 const Logo = styled.h1`
   font-weight: bold;
   ${mobails} {
     display: none;
+  }
+  ${tablet} {
+    font-size: 12px;
   }
 `;
 
@@ -73,8 +85,13 @@ const Right = styled.div`
   justify-content: flex-end;
 
   ${mobails} {
-    justify-content: center;
-    flex: 3;
+    justify-content: flex-start;
+    flex: 4;
+    transform: scale(0.8);
+  }
+  ${tablet} {
+    justify-content: flex-end;
+    flex: 1;
   }
 `;
 
@@ -83,7 +100,11 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-left: 25px;
   ${mobails} {
-    font-size: 12px;
+    font-size: 10px;
+    margin-left: 5px;
+  }
+  ${tablet} {
+    font-size: 11px;
     margin-left: 10px;
   }
 `;
@@ -91,7 +112,6 @@ const MenuItem = styled.div`
 const Navbar: React.FC = () => {
   const quantity = useSelector((state: any) => state.cart.quantity);
 
-  console.log(quantity as number);
   return (
     <Container>
       <Wrapper>
@@ -115,11 +135,11 @@ const Navbar: React.FC = () => {
           <MenuItem>SIGN IN</MenuItem>
           </Link>
           <Link to="/cart">
-          <MenuItem>
-            <Badge badgeContent={quantity} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
-          </MenuItem>
+            <MenuItem>
+              <Badge badgeContent={quantity} color="primary">
+                <ShoppingCartOutlined />
+              </Badge>
+            </MenuItem>
           </Link>
         </Right>
       </Wrapper>

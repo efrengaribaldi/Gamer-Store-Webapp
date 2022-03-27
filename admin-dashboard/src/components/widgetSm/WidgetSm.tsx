@@ -1,8 +1,6 @@
 import "./widgetSm.css";
 import { Visibility } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
-import React, { useEffect } from "react";
-import { userRequest } from "../../requestMethods";
+import React from "react";
 
 const WidgetSm: React.FC = () => {
   // const [users, setUsers] = React.useState([]);

@@ -49,7 +49,7 @@ authRouter.post("/login", async (req, res) => {
       id: user?._id,
     });
   } catch (error) {
-    res.status(500).json(error);
+    // res.status(500).json(error);
   }
 });
 
