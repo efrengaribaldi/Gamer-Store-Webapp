@@ -1,8 +1,11 @@
 import "./sidebar.css";
 import { LineStyle, PermIdentity, Storefront } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function Sidebar() {
+const Sidebar: React.FC = () => {
+  const currentUser = useSelector((state: any) => state.user.currentUser);
+  const username: string = currentUser ? currentUser.username : "null";
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -28,12 +31,15 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
-              <li className="sidebarListItem">
-                <PermIdentity className="sidebarIcon" />
-                Users
-              </li>
-            </Link>
+            {username === "root" && (
+              <Link to="/users" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  Users
+                </li>
+              </Link>
+            )}
+
             <Link to="/products" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
@@ -87,4 +93,6 @@ export default function Sidebar() {
       </div>
     </div>
   );
-}
+};
+
+export default Sidebar;

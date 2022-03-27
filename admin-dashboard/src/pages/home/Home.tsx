@@ -1,17 +1,23 @@
-import Chart from "../../components/chart/Chart";
-import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
-import { userData } from "../../dummyData";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import { useSelector } from "react-redux";
 
-const Home: React.FC = () => {
+interface HomeProps {
+  username: string | undefined;
+}
+
+const Home: React.FC<HomeProps> = () => {
+  const currentUser = useSelector((state: any) => state.user.currentUser);
+  const username: string = currentUser ? currentUser.username : "null";
   return (
     <div>
       <Topbar />
       <div className="container">
         <Sidebar />
         <div className="home">
+          <h1>Welcome {username}</h1>
+          {/* 
           <FeaturedInfo />
           <Chart
             data={userData}
@@ -19,7 +25,7 @@ const Home: React.FC = () => {
             grid
             dataKey="Active User"
           />
-          {/* 
+         
           <div className="homeWidgets">
             <WidgetSm />
             <WidgetLg /> 

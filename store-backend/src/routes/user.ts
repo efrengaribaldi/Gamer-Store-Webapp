@@ -9,17 +9,6 @@ import CryptoJS from "crypto-js";
 
 const userRouter = express.Router();
 
-// Create
-userRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
-  const newUser = new UserModel(req.body.user);
-
-  try {
-    const savedUser = await newUser.save();
-    res.status(200).json(savedUser);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 //Update
 userRouter.put("/:id", verifyTokenAuthorization, async (req, res) => {
   if (req.body.password) {

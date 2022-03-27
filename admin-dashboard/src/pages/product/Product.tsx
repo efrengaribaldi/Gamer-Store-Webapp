@@ -8,7 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { updateProduct } from "../../redux/apiCalls";
 
-const Product: React.FC = () => {
+interface ProductProps {
+  // username: string | undefined;
+}
+
+const Product: React.FC<ProductProps> = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const product = useSelector((state: any) =>
