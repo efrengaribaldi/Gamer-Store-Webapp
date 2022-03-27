@@ -3,14 +3,14 @@ import {
   Facebook,
   GitHub,
   Instagram,
-  LinkedIn,
   PhoneEnabled,
   Room,
   Twitter,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobails, tablet } from "../responsive";
+import Button from "@mui/material/Button";
 
 interface PropsColor {
   color: string;
@@ -97,6 +97,7 @@ const Payment = styled.img`
 `;
 
 const Footer: React.FC = () => {
+  let navigate = useNavigate();
   return (
     <Container>
       <Left>
@@ -127,19 +128,34 @@ const Footer: React.FC = () => {
         <Title>Useful Links</Title>
         <List>
           <ListItem>
-            <Link to="/">Home</Link>
+            <Button
+              variant="text"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Home
+            </Button>
           </ListItem>
           <ListItem>
-            <Link to="/cart">Cart </Link>
+            <Button
+              variant="text"
+              onClick={() => {
+                navigate("/cart");
+              }}
+            >
+              Cart
+            </Button>
           </ListItem>
           <ListItem>
-            <Link to="/products/pc-parts">PC Parts </Link>
-          </ListItem>
-          <ListItem>
-            <Link to="/products/pc-cases">PC Cases </Link>
-          </ListItem>
-          <ListItem>
-            <Link to="/products/pc-add-ons">PC Add-ons </Link>
+            <Button
+              variant="text"
+              onClick={() => {
+                navigate("/products", { state: "pc-parts" });
+              }}
+            >
+              Products
+            </Button>
           </ListItem>
         </List>
       </Center>

@@ -1,6 +1,5 @@
-import { red } from "@mui/material/colors";
 import React from "react";
-import { useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -61,13 +60,15 @@ interface IFilters {
 }
 
 const ProductListView: React.FC = () => {
-  const location = useLocation();
-  const cat = location.pathname.split("/")[2];
-  const [filters, setFilters] = React.useState<IFilters>({});
+  const { state } = useLocation();
+  const [filters, setFilters] = React.useState<IFilters>({
+    color: "rgb",
+    type: state as string,
+  });
   const [sort, setSort] = React.useState("type");
 
   const handleFilters = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as string;
+    const value = e.target.value;
     setFilters({
       ...filters,
       [e.target.name]: value,
@@ -83,17 +84,17 @@ const ProductListView: React.FC = () => {
     <Container>
       <Navbar />
       <Announcement />
-      <Title>{cat}</Title>
+      <Title>{filters.type}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products</FilterText>
           <Select name="color" onChange={handleFilters}>
             <Option disabled>Color</Option>
-            <Option>rgb</Option>
-            <Option>neutrals</Option>
-            <Option>pastel colours</Option>
+            <Option value="rgb">rgb</Option>
+            <Option value="neutrals">neutrals</Option>
+            <Option value="pastel-colours">pastel colours</Option>
           </Select>
-          <Select name="type" onChange={handleFilters}>
+          <Select name="type" onChange={handleFilters} value={filters.type}>
             <Option disabled>Type</Option>
             <Option value="pc-parts">pc-parts</Option>
             <Option value="pc-cases">pc-cases</Option>
@@ -110,7 +111,7 @@ const ProductListView: React.FC = () => {
         </Filter>
       </FilterContainer>
 
-      <Products cat={filters.type as string} filters={filters} sort={sort} />
+      <Products filters={filters} sort={sort} />
       <Footer />
     </Container>
   );

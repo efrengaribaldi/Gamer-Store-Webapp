@@ -12,7 +12,7 @@ const HomepageView: React.FC = () => {
       <Navbar />
       <Slider />
       <Categories />
-      <Products cat={""} filters={{}} sort={""} />
+      <Products filters={{}} sort={""} />
       <Footer />
     </div>
   );

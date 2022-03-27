@@ -1,6 +1,5 @@
 import { Add, Remove } from "@material-ui/icons";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
@@ -165,7 +164,7 @@ const ProductView: React.FC = () => {
       setQuantity(quantity + 1);
     }
   };
-  
+
   const handleClick = () => {
     //update cart
     dispatch(addProduct({ ...product, quantity }));

@@ -1,6 +1,6 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { useState } from "react";
-import styled, { StyledFunction } from "styled-components";
+import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobails, tablet } from "../responsive";
 import { useNavigate } from "react-router-dom";
@@ -106,8 +106,7 @@ const Slider: React.FC = () => {
   };
   let navigate = useNavigate();
   const routeChange = (path: string) => {
-    path = `/products/${path}`;
-    navigate(path);
+    navigate("/products", { state: path });
   };
 
   return (

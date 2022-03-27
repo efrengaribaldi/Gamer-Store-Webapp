@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ICategory from "../interfaces/ICategory";
 import { mobails, tablet } from "../responsive";
@@ -45,15 +45,17 @@ const Button = styled.button`
 `;
 
 const CategoryItem: React.FC<ICategory> = ({ id, img, title, cat }) => {
+  let navigate = useNavigate();
+  const routeChange = (type: string) => {
+    navigate("/products", { state: type });
+  };
   return (
     <Container>
-      <Link to={`/products/${cat}`}>
-        <Image src={img} />
-        <Info>
-          <Title>{title}</Title>
-          <Button>SHOP NOW</Button>
-        </Info>
-      </Link>
+      <Image src={img} />
+      <Info>
+        <Title>{title}</Title>
+        <Button onClick={() => routeChange(cat)}>SHOP NOW</Button>
+      </Info>
     </Container>
   );
 };
