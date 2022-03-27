@@ -6,7 +6,11 @@ import Topbar from "../../components/topbar/Topbar";
 import { addProduct } from "../../redux/apiCalls";
 import "./newProduct.css";
 
-const NewProduct: React.FC = () => {
+interface NewProductProps {
+  // username: string | undefined;
+}
+
+const NewProduct: React.FC<NewProductProps> = () => {
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState<any>({});
   // const [files, setFile] = useState<File>();

@@ -8,7 +8,11 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 
-const ProductList: React.FC = () => {
+interface ProductListProps {
+  // username: string | undefined;
+}
+
+const ProductList: React.FC<ProductListProps> = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: any) => state.product.products);
   useEffect(() => {

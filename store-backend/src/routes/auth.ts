@@ -7,13 +7,15 @@ const authRouter = express.Router();
 
 // Register
 authRouter.post("/register", async (req, res) => {
+  const reqUser = req.body.user;
   const newUser = new UserModel({
-    username: req.body.username,
-    email: req.body.email,
+    username: reqUser.username,
+    email: reqUser.email,
     password: CryptoJS.AES.encrypt(
-      req.body.password,
+      reqUser.password,
       process.env.PASS_SEC!
     ).toString(),
+    isAdmin: reqUser.isAdmin,
   });
   try {
     const savedUser = await newUser.save();
