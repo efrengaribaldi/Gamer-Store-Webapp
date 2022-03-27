@@ -1,5 +1,6 @@
 import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -172,7 +173,11 @@ const Button = styled.button`
 `;
 
 const CartView: React.FC = () => {
-  const cart = useSelector((state: any) =>state.cart)
+  const cart = useSelector((state: any) => state.cart);
+  const items = useSelector((state: any) => state.cart.quantity);
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
   return (
     <Container>
       <Navbar />
@@ -182,7 +187,7 @@ const CartView: React.FC = () => {
         <Top>
           <TopButton types="notFilled">KEEP SEARCHING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag (2)</TopText>
+            <TopText>Shopping Bag ({items})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
 
@@ -190,35 +195,36 @@ const CartView: React.FC = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product: any)=>(
-
-            <Product>
-              <ProductDetail>
-                <Image src={product.img} />
-                <Details>
-                  <ProductName>
-                    <b>Product: </b>{product.title}
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b>{product._id}
-                  </ProductId>
-                  <ProductColor colors={product.color} />
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Remove />
-                  <ProductAmount>{product.quantity}</ProductAmount>
-                  <Add />
-                </ProductAmountContainer>
-                <ProductPrice>$ {product.price*product.quantity}</ProductPrice>
-              </PriceDetail>
-            </Product>
-          ))}
+            {cart.products.map((product: any) => (
+              <Product>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product: </b>
+                      {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID: </b>
+                      {product._id}
+                    </ProductId>
+                    <ProductColor colors={product.color} />
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Remove />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Add />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    $ {product.price * product.quantity}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
 
             <Hr />
-
-            
           </Info>
           <Summary>
             <SummaryTitle>ORDER CHECKOUT</SummaryTitle>
