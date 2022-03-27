@@ -70,8 +70,8 @@ const Error = styled.span`
   color: red;
 `;
 const LoginView: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state: any) => state.user);
 
