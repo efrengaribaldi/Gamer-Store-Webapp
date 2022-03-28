@@ -6,9 +6,9 @@ import { verifyTokenAndAdmin } from "./verifyToken";
 const productRouter = express.Router();
 
 //Create
-productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
+productRouter.post("/", async (req, res) => {
   const newProduct = new ProductModel(req.body.product);
-
+console.log(newProduct);
   try {
     const savedProduct = await newProduct.save();
     res.status(200).json(savedProduct);
@@ -18,7 +18,7 @@ productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Update
-productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+productRouter.put("/:id", async (req, res) => {
   try {
     const updatedProduct = await ProductModel.findByIdAndUpdate(
       req.params.id,
@@ -34,7 +34,7 @@ productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Delete
-productRouter.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+productRouter.delete("/:id", async (req, res) => {
   try {
     await ProductModel.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Product deleted" });

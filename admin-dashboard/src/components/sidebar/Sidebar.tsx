@@ -1,7 +1,7 @@
 import "./sidebar.css";
-import { LineStyle, PermIdentity, Storefront } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { LineStyle, PermIdentity, Storefront } from "@mui/icons-material";
 
 const Sidebar: React.FC = () => {
   const currentUser = useSelector((state: any) => state.user.currentUser);

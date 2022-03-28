@@ -1,6 +1,6 @@
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import { DeleteOutline } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { ReactChild, ReactFragment, ReactPortal, useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";

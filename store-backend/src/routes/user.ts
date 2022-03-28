@@ -10,7 +10,7 @@ import CryptoJS from "crypto-js";
 const userRouter = express.Router();
 
 //Update
-userRouter.put("/:id", verifyTokenAuthorization, async (req, res) => {
+userRouter.put("/:id", async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
@@ -37,7 +37,7 @@ userRouter.put("/:id", verifyTokenAuthorization, async (req, res) => {
 });
 
 //Delete
-userRouter.delete("/:id", verifyTokenAuthorization, async (req, res) => {
+userRouter.delete("/:id", async (req, res) => {
   try {
     await UserModel.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "User deleted" });
@@ -47,7 +47,7 @@ userRouter.delete("/:id", verifyTokenAuthorization, async (req, res) => {
 });
 
 //Get User
-userRouter.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
+userRouter.get("/find/:id", async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.id);
     res.status(200).json({
@@ -62,7 +62,7 @@ userRouter.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Get All Users
-userRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
+userRouter.get("/", async (req, res) => {
   const query = req.query.new;
   try {
     const users = query
@@ -75,7 +75,7 @@ userRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Get User Stats
-userRouter.get("/stats", verifyTokenAndAdmin, async (req, res) => {
+userRouter.get("/stats", async (req, res) => {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
   try {

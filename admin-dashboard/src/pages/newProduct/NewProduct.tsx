@@ -12,7 +12,7 @@ interface NewProductProps {
 
 const NewProduct: React.FC<NewProductProps> = () => {
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState<any>({});
+  const [inputs, setInputs] = useState<any>({type:"pc-parts", color: "rgb", inStock: true});
   // const [files, setFile] = useState<File>();
 
   const handleChange = (
@@ -23,9 +23,12 @@ const NewProduct: React.FC<NewProductProps> = () => {
     });
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    addProduct(inputs, dispatch);
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+   
+    await addProduct(inputs, dispatch);
   };
+
+  console.log(inputs);
 
   return (
     <div>
@@ -76,18 +79,25 @@ const NewProduct: React.FC<NewProductProps> = () => {
               />
             </div>
             <div className="addProductItem">
-              <label>Categories</label>
-              <select name="categories" onChange={handleChange}>
+              <label>Type</label>
+              <select name="type" onChange={handleChange}>
                 <option value="pc-parts">PC Parts</option>
                 <option value="pc-cases">PC Cases</option>
                 <option value="pc-add-ons">PC-Add-Ons</option>
               </select>
-              {/* <input
-                type="text"
-                placeholder="pc-parts,pc-adds-on"
-                onChange={handleCategories}
-              /> */}
+              
             </div>
+           
+            <div className="addProductItem">
+              <label>Color</label>
+              <select name="color" onChange={handleChange}>
+                <option value="rgb">RGB</option>
+                <option value="neutrals">Neutrals</option>
+                <option value="pastel-colours">Pastel Colours</option>
+              </select>
+              
+            </div>
+            
             <div className="addProductItem">
               <label>Stock</label>
               <select name="inStock" onChange={handleChange}>
