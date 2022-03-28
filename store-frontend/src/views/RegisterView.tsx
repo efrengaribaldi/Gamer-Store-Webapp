@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { register } from "../redux/apiCalls";
 import { mobails, tablet } from "../responsive";
 
 const Container = styled.div`
@@ -61,7 +65,7 @@ const Agreement = styled.span`
   margin: 20px 0px;
 `;
 const Button = styled.button`
-  width: 40%;
+  width: 60%;
   border: none;
   padding: 15px 20px;
   background-color: teal;
@@ -76,22 +80,51 @@ const Button = styled.button`
 `;
 
 const RegisterView: React.FC = () => {
+  const dispatch = useDispatch();
+  const [inputs, setInputs] = useState<any>({ isAdmin: "false" });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setInputs((prev: any) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    await register(inputs, dispatch);
+  };
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder="name"></Input>
-          <Input placeholder="last name"></Input>
-          <Input placeholder="username"></Input>
-          <Input placeholder="email"></Input>
-          <Input placeholder="password"></Input>
-          <Input placeholder="confirm password"></Input>
+          <Input
+            name="username"
+            type="text"
+            placeholder="username"
+            onChange={handleChange}
+          ></Input>
+          <Input
+            name="email"
+            type="email"
+            placeholder="email@gmail.com"
+            onChange={handleChange}
+          ></Input>
+          <Input
+            name="password"
+            type="password"
+            placeholder="password"
+            onChange={handleChange}
+          ></Input>
+
           <Agreement>
             By creating an account with Gamer-Store y accept this is my own
             information<b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE ACCOUNT</Button>
+          <Link to="/">
+            <Button onClick={handleClick}>CREATE ACCOUNT</Button>
+          </Link>
         </Form>
       </Wrapper>
     </Container>
