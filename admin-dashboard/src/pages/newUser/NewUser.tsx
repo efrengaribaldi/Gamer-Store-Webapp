@@ -12,7 +12,7 @@ interface NewUserProps {
 
 const NewUser: React.FC<NewUserProps> = () => {
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState<any>({});
+  const [inputs, setInputs] = useState<any>({isAdmin: "true"});
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -23,6 +23,7 @@ const NewUser: React.FC<NewUserProps> = () => {
   };
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    
     await addAccount(inputs, dispatch);
   };
   console.log(inputs);
