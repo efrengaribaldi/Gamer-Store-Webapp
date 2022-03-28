@@ -6,7 +6,7 @@ import {
   PhoneEnabled,
   Room,
   Twitter,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobails, tablet } from "../responsive";

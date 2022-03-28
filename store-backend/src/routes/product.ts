@@ -8,7 +8,7 @@ const productRouter = express.Router();
 //Create
 productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
   const newProduct = new ProductModel(req.body.product);
-
+console.log(newProduct);
   try {
     const savedProduct = await newProduct.save();
     res.status(200).json(savedProduct);

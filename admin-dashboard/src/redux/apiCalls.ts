@@ -142,6 +142,7 @@ export const addProduct = async (
 ) => {
   dispatch(addProductStart());
   try {
+    console.log(product);
     const res = await userRequest.post("/products/", { product });
     dispatch(addProductSuccess(res.data));
   } catch (err) {

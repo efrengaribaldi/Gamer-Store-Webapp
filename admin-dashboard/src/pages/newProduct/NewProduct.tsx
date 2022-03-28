@@ -12,7 +12,7 @@ interface NewProductProps {
 
 const NewProduct: React.FC<NewProductProps> = () => {
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState<any>({});
+  const [inputs, setInputs] = useState<any>({type:"pc-parts", color: "rgb", inStock: true});
   // const [files, setFile] = useState<File>();
 
   const handleChange = (
@@ -23,9 +23,12 @@ const NewProduct: React.FC<NewProductProps> = () => {
     });
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    addProduct(inputs, dispatch);
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+   
+    await addProduct(inputs, dispatch);
   };
+
+  console.log(inputs);
 
   return (
     <div>

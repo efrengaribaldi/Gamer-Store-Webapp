@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined } from "@material-ui/icons";
+import { ShoppingCartOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { useDispatch, useSelector } from "react-redux";
