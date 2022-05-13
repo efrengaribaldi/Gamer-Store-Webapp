@@ -7,6 +7,9 @@ import productRouter from "./routes/product";
 import orderRouter from "./routes/order";
 import cartRouter from "./routes/cart";
 import cors from "cors";
+import passport from "passport";
+import cookieSession from "cookie-session";
+import localStrategy from "./passport/passport";
 
 dotenv.config();
 
@@ -19,8 +22,21 @@ mongoose
   .connect(mongooseurl)
   .then(() => console.log("DB Connection Successful!"));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 app.use(express.json());
+
+localStrategy(passport);
+app.use(
+  cookieSession({ name: "session", keys: ["lars"], maxAge: 24 * 60 * 60 * 100 })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);

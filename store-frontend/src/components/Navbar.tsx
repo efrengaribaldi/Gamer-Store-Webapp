@@ -2,7 +2,7 @@ import { ShoppingCartOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import { logout } from "../redux/apiCalls";
@@ -80,17 +80,21 @@ const MenuItem = styled.div`
   }
 `;
 
-const Navbar: React.FC = () => {
+const Username = styled.h4`
+  ${tablet} {
+    display: none;
+  }
+`;
+
+const Navbar: React.FC<any> = ({ user }) => {
   const quantity = useSelector((state: any) => state.cart.quantity);
   const currentUser = useSelector((state: any) => state.user.currentUser);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       await logout(dispatch);
-      localStorage.removeItem("persist:root");
-      navigate("/");
+      window.open("http://localhost:5002/api/auth/logout", "_self");
     } catch (err) {
       console.log(err);
     }
@@ -116,7 +120,10 @@ const Navbar: React.FC = () => {
               </Link>
             </>
           ) : (
-            <Button onClick={handleClick}>Logout</Button>
+            <>
+              <Username>{user.username}</Username>
+              <Button onClick={handleClick}>Logout</Button>
+            </>
           )}
 
           <Link to="/cart">

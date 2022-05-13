@@ -6,7 +6,6 @@ import {
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
-import IPopularProduct from "../interfaces/IPopularProduct";
 
 const Info = styled.div`
   opacity: 0;

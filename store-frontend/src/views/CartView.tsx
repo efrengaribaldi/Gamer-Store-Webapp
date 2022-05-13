@@ -1,12 +1,11 @@
-import { Add, Remove } from "@material-ui/icons";
-import { useState } from "react";
+// import { Add, Remove } from "@material-ui/icons";
+// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import { deleteProduct } from "../redux/apiCalls";
-import { removeProduct } from "../redux/cartRedux";
+// import { removeProduct } from "../redux/cartRedux";
 import { mobails, tablet } from "../responsive";
 
 interface Props {
@@ -177,7 +176,7 @@ const Button = styled.button`
 const CartView: React.FC = () => {
   const cart = useSelector((state: any) => state.cart);
   const items = useSelector((state: any) => state.cart.quantity);
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const handleDelete = (product: any) => {
     deleteProduct(product, dispatch);
@@ -185,7 +184,6 @@ const CartView: React.FC = () => {
 
   return (
     <Container>
-      <Navbar />
       <Announcement />
       <Wrapper>
         <Title>YOUR GAMER BAG</Title>
@@ -217,7 +215,9 @@ const CartView: React.FC = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Button onClick={() => handleDelete({...product, index})}>Remove</Button>
+                    <Button onClick={() => handleDelete({ ...product, index })}>
+                      Remove
+                    </Button>
                     <ProductAmount>{product.quantity}</ProductAmount>
                   </ProductAmountContainer>
                   <ProductPrice>

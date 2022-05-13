@@ -1,9 +1,11 @@
-import express from "express";
+import express, { Router } from "express";
 import UserModel from "../models/UserModel";
 import jwt from "jsonwebtoken";
 import CryptoJS from "crypto-js";
+import passport from "passport";
 
 const authRouter = express.Router();
+const CLIENT_URL = "http://localhost:3000/";
 
 // Register
 authRouter.post("/register", async (req, res) => {
@@ -54,5 +56,57 @@ authRouter.post("/login", async (req, res) => {
     // res.status(500).json(error);
   }
 });
+
+authRouter.get("/login/failed", (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: "failure",
+  });
+});
+
+authRouter.get("/login/success", (req: any, res) => {
+  if (req.user) {
+    const username = req.user.displayName;
+    const id = req.user.id;
+    const isAdmin = false;
+    const email = "@gmail.com";
+
+    const accessToken = jwt.sign(
+      {
+        id: id,
+        isAdmin: isAdmin,
+      },
+      process.env.JWT_SECRET!,
+      { expiresIn: "3d" }
+    );
+    res.status(200).json({
+      username: username,
+      email: email,
+      isAdmin: isAdmin,
+      accessToken: accessToken,
+      id: id,
+    });
+  } else {
+    res.status(204).send({});
+  }
+});
+
+authRouter.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect(CLIENT_URL);
+});
+
+authRouter.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
+
+authRouter.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: CLIENT_URL,
+    failureRedirect: "/login/failed",
+  })
+);
 
 export default authRouter;
