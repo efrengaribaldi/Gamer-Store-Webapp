@@ -31,6 +31,15 @@ Nota: Es importante correr el store-backend en otra terminal para poder visualiz
 
 ## Store-Backend package.
 
+El backend usa un .env para enviroment variables, es necesario crear un .env nuevo o usar el mismo .test.env incluido en el repositorio.
+Le compartimos los datos por aparte para probar el backend:
+
+EXPRESS_PORT=
+MONGO_URL=
+PASS_SEC=
+JWT_SECRET=
+STRIPE_KEY=
+
 Para correr la base de datos, es necesario contar con los permisos de Mongo Atlas en la base de datos (o bien contar con su propia bd) dentro del archivo .env y correr los siguientes comandos. En caso de que no se cuente con node_modules o tener una versión desactualizada, es necesario correr el comando:
 
     yarn
@@ -51,6 +60,21 @@ Funciona similar al store front-end, para instalar dependencias:
 
 Una vez instalado, se puede correr el comando siguiente para modificar el puerto donde se desee correr (para que no sea el mismo que store-frontend)
 
+### Para Windows
+
     yarn run startWindows
 
+### Para Mac / Linux
+
+    yarn run start
+
 Y puede tardar unos minutos y abrirá directamente la página del login de usuarios.
+
+## NOTAS ADICIONALES:
+
+Por el momento, store-frontend y store-backend tienen mayor compatibilidad con node v16 lts.
+Admin-dashboard tiene mayor compabitilidad con node v14 lts, también puede funcionar con v16 pero en algunos casos falla y desconocemos el porque. Esto por algunos errores que notamos en el package manager.
+Por lo que probablemente tenga que usar node version manager (nvm).
+
+    nvm install <node-version>
+    nvm use <node-version>
