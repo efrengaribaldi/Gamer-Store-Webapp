@@ -40,7 +40,7 @@ PASS_SEC=
 JWT_SECRET=
 STRIPE_KEY=
 
-Para correr la base de datos, es necesario contar con los permisos de Mongo Atlas en la base de datos (o bien contar con su propia bd) dentro del archivo .env y correr los siguientes comandos. En caso de que no se cuente con node_modules o tener una versión desactualizada, es necesario correr el comando:
+Para correr la base de datos, es necesario contar con los permisos de Mongo Atlas en la base de datos (o bien contar con su propia bd) dentro del archivo .env y correr los siguientes comandos. En caso de que no se cuente con node_modules o tener una versión desactualizada, es necesario correr el comando dentro del directorio "./store-backend":
 
     yarn
 
@@ -54,7 +54,7 @@ Y en consola si tienes permisos para ingresar a la BD y las credenciales, deber�
 
 Esta página es el servicio de usuarios administradores que cuenten con credenciales autorizadas para ingresar a esta pantalla. De tal forma que ellos sean capaces de realizar operaciones en la base de datos ya sea de productos (un usuario admin) y un creador de admins (super admin).
 
-Funciona similar al store front-end, para instalar dependencias:
+Funciona similar al store front-end, para instalar dependencias dentro del directorio "./admin-dashboard":
 
     yarn
 
