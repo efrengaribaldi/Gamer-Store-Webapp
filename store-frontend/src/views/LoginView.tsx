@@ -81,6 +81,11 @@ const LoginView: React.FC = () => {
     e.preventDefault();
     login(dispatch, { username, password });
   };
+
+  const handleGoogleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    window.open("http://localhost:5002/api/auth/google", "_self");
+  };
   return (
     <Container>
       <Wrapper>
@@ -100,7 +105,7 @@ const LoginView: React.FC = () => {
           <Button onClick={handleClick} disabled={isFetching}>
             LOGIN
           </Button>
-          <IconButton>
+          <IconButton onClick={handleGoogleLogin}>
             {"Login with Google"}
             &nbsp;
             <GoogleIcon fontSize="medium" />
