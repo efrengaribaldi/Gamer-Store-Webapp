@@ -75,7 +75,7 @@ const LoginView: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state: any) => state.user);
+  const { error } = useSelector((state: any) => state.user);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -102,9 +102,7 @@ const LoginView: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></Input>
 
-          <Button onClick={handleClick} disabled={isFetching}>
-            LOGIN
-          </Button>
+          <Button onClick={handleClick}>LOGIN</Button>
           <IconButton onClick={handleGoogleLogin}>
             {"Login with Google"}
             &nbsp;

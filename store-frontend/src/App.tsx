@@ -7,30 +7,14 @@ import Navbar from "./components/Navbar";
 import ProductListView from "./views/ProductListView";
 import ProductView from "./views/ProductView";
 import RegisterView from "./views/RegisterView";
-import { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 const App: React.FC = () => {
   const user = useSelector((state: any) => state.user.currentUser);
-  // useEffect(() => {
-  //   const getProducts = async () => {
-  //     try {
-  //       const res = await axios.get<IProduct[]>(
-  //         `http://localhost:5002/api/products?${searchParams.toString()}`
-  //       );
-  //       setProducts(res.data);
-  //     } catch (err) {}
-  //   };
-  //   getProducts();
-  //   const getGoogleUser = async () => {
-  //     try {
-  //       const res = await axios.get<>()
-  //     }
-  //   }
-  // })
   return (
     <BrowserRouter>
       <div>
+        <Navbar user={user} />
         <Routes>
           <Route path="/cart" element={<CartView />} />
           <Route path="/products" element={<ProductListView />} />

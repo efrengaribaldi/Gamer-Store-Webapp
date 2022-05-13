@@ -64,22 +64,30 @@ authRouter.get("/login/failed", (req, res) => {
   });
 });
 
-authRouter.get("/login/success", (req, res) => {
-  // const accessToken = jwt.sign(
-  //   {
-  //     id: user?._id,
-  //     isAdmin: user?.isAdmin,
-  //   },
-  //   process.env.JWT_SECRET!,
-  //   { expiresIn: "3d" }
-  // );
-
+authRouter.get("/login/success", (req: any, res) => {
   if (req.user) {
+    const username = req.user.displayName;
+    const id = req.user.id;
+    const isAdmin = false;
+    const email = "@gmail.com";
+
+    const accessToken = jwt.sign(
+      {
+        id: id,
+        isAdmin: isAdmin,
+      },
+      process.env.JWT_SECRET!,
+      { expiresIn: "3d" }
+    );
     res.status(200).json({
-      success: true,
-      message: "successfull",
-      user: req.user,
+      username: username,
+      email: email,
+      isAdmin: isAdmin,
+      accessToken: accessToken,
+      id: id,
     });
+  } else {
+    res.status(204).send({});
   }
 });
 
