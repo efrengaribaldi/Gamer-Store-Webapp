@@ -72,9 +72,6 @@ Y puede tardar unos minutos y abrirá directamente la página del login de usuar
 
 ## NOTAS ADICIONALES:
 
-Por el momento, store-frontend y store-backend tienen mayor compatibilidad con node v16 lts.
-Admin-dashboard tiene mayor compabitilidad con node v14 lts, también puede funcionar con v16 pero en algunos casos falla y desconocemos el porque. Esto por algunos errores que notamos en el package manager.
-Por lo que probablemente tenga que usar node version manager (nvm).
+- Por el momento, store-frontend y store-backend y Admin-Dashboard tienen mayor compatibilidad con node v16 lts.
 
-    nvm install <node-version>
-    nvm use <node-version>
+- Para el inicio de sesión con Google, es necesario que sea con una cuenta institucional. Envia un error en caso que sea una cuenta fuera de este parámetro.
