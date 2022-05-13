@@ -1,9 +1,11 @@
+import { IconButton } from "@material-ui/core";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobails, tablet } from "../responsive";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const Container = styled.div`
   width: 110v;
@@ -70,8 +72,8 @@ const Error = styled.span`
   color: red;
 `;
 const LoginView: React.FC = () => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state: any) => state.user);
 
@@ -91,13 +93,18 @@ const LoginView: React.FC = () => {
 
           <Input
             placeholder="password"
-            type={'password'}
+            type={"password"}
             onChange={(e) => setPassword(e.target.value)}
           ></Input>
 
           <Button onClick={handleClick} disabled={isFetching}>
             LOGIN
           </Button>
+          <IconButton>
+            {"Login with Google"}
+            &nbsp;
+            <GoogleIcon fontSize="medium" />
+          </IconButton>
           {error && <Error>Something went wrong...</Error>}
           <Link>FORGOT PASSWORD?</Link>
           <Link>CREATE NEW ACCOUNT</Link>
