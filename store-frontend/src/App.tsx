@@ -23,7 +23,6 @@ export function useAnalytics() {
   React.useEffect(() => {
     // If enviroment is localhost, we initialize Analytics
     if (window.location.href.includes("localhost")) {
-      console.log(process.env.REACT_APP_GA_TRACKING_CODE!);
       ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_CODE!);
     }
 
@@ -51,7 +50,6 @@ export function Wrapper(props: WrapperProps) {
     // If React GA initialized, now we are sending pageviews
     // to our Google Analytics when location changes
     if (props.initialized) {
-      console.log(location.pathname + location.search);
       ReactGA.pageview(location.pathname + location.search);
     }
   }, [props.initialized, location]);
