@@ -10,6 +10,7 @@ import cors from "cors";
 import passport from "passport";
 import cookieSession from "cookie-session";
 import localStrategy from "./passport/passport";
+import stripeRouter from "./routes/stripe";
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/carts", cartRouter);
+app.use("/api/checkout", stripeRouter);
 
 app.listen(port, () => {
   let listApp = `App listening on port ${port}! (http://localhost:${port})`;
