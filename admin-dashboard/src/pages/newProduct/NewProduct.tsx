@@ -12,23 +12,40 @@ interface NewProductProps {
 
 const NewProduct: React.FC<NewProductProps> = () => {
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState<any>({type:"pc-parts", color: "rgb", inStock: true});
-  // const [files, setFile] = useState<File>();
+  const [inputs, setInputs] = useState<any>({
+    type: "pc-parts",
+    color: "rgb",
+    inStock: true,
+  });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (name: string, value: string) => {
     setInputs((prev: any) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      return { ...prev, [name]: value };
     });
   };
 
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-   
-    await addProduct(inputs, dispatch);
+  const convertToBase64 = (file: Blob) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
   };
 
-  console.log(inputs);
+  const handleFileUpload = async (e: React.ChangeEvent<any>) => {
+    const file = e.target.files[0];
+    const base64 = (await convertToBase64(file)) as string;
+    handleChange(e.target.name, base64);
+  };
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    await addProduct(inputs, dispatch);
+  };
 
   return (
     <div>
@@ -46,9 +63,9 @@ const NewProduct: React.FC<NewProductProps> = () => {
               <label>Image</label>
               <input
                 name="img"
-                type="text"
-                placeholder="http://img-url.com"
-                onChange={handleChange}
+                type="file"
+                accept=".jpeg, .png, .jpg"
+                onChange={handleFileUpload}
               />
             </div>
             <div className="addProductItem">
@@ -57,7 +74,7 @@ const NewProduct: React.FC<NewProductProps> = () => {
                 name="title"
                 type="text"
                 placeholder="PC"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
               />
             </div>
             <div className="addProductItem">
@@ -66,7 +83,7 @@ const NewProduct: React.FC<NewProductProps> = () => {
                 name="description"
                 type="text"
                 placeholder="Description"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
               />
             </div>
             <div className="addProductItem">
@@ -75,32 +92,39 @@ const NewProduct: React.FC<NewProductProps> = () => {
                 name="price"
                 type="number"
                 placeholder="100"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
               />
             </div>
             <div className="addProductItem">
               <label>Type</label>
-              <select name="type" onChange={handleChange}>
+              <select
+                name="type"
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
+              >
                 <option value="pc-parts">PC Parts</option>
                 <option value="pc-cases">PC Cases</option>
                 <option value="pc-add-ons">PC-Add-Ons</option>
               </select>
-              
             </div>
-           
+
             <div className="addProductItem">
               <label>Color</label>
-              <select name="color" onChange={handleChange}>
+              <select
+                name="color"
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
+              >
                 <option value="rgb">RGB</option>
                 <option value="neutrals">Neutrals</option>
                 <option value="pastel-colours">Pastel Colours</option>
               </select>
-              
             </div>
-            
+
             <div className="addProductItem">
               <label>Stock</label>
-              <select name="inStock" onChange={handleChange}>
+              <select
+                name="inStock"
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
+              >
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>

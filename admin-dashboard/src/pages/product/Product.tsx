@@ -29,12 +29,29 @@ const Product: React.FC<ProductProps> = () => {
     inStock: product.inStock,
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (name: string, value: string) => {
     setInputs((prev: any) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      return { ...prev, [name]: value };
     });
+  };
+
+  const convertToBase64 = (file: Blob) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<any>) => {
+    const file = e.target.files[0];
+    const base64 = (await convertToBase64(file)) as string;
+    handleChange(e.target.name, base64);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -90,34 +107,41 @@ const Product: React.FC<ProductProps> = () => {
                 <label>Image</label>
                 <input
                   name="img"
-                  type="text"
-                  placeholder={product.img}
-                  onChange={handleChange}
+                  type="file"
+                  accept=".jpeg, .png, .jpg"
+                  onChange={handleFileUpload}
                 />
 
                 <label>Product Title</label>
                 <input
                   name="title"
                   type="text"
-                  placeholder={product.title}
-                  onChange={handleChange}
+                  placeholder="title"
+                  value={inputs.title}
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
                 <label>Product Description</label>
                 <input
                   name="description"
                   type="text"
-                  placeholder={product.description}
-                  onChange={handleChange}
+                  placeholder="description"
+                  value={inputs.description}
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
                 <label>Price</label>
                 <input
                   name="price"
                   type="number"
-                  placeholder={product.price}
-                  onChange={handleChange}
+                  placeholder="price"
+                  value={inputs.price}
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
                 <label>In Stock</label>
-                <select name="inStock" id="idStock" onChange={handleChange}>
+                <select
+                  name="inStock"
+                  id="idStock"
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
+                >
                   <option value="true">Yes</option>
                   <option value="false">No</option>
                 </select>

@@ -22,6 +22,8 @@ mongoose
   .connect(mongooseurl)
   .then(() => console.log("DB Connection Successful!"));
 
+app.use(express.json({ limit: "25mb" }));
+app.use(express.urlencoded({ limit: "25mb", extended: true }));
 app.use(
   cors({
     origin: ["http://localhost:3000", "http://localhost:3002"],
@@ -29,7 +31,6 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
 
 localStrategy(passport);
 app.use(
