@@ -1,12 +1,13 @@
-// import { Add, Remove } from "@material-ui/icons";
-// import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import { deleteProduct } from "../redux/apiCalls";
-// import { removeProduct } from "../redux/cartRedux";
 import { mobails, tablet } from "../responsive";
+import StripeCheckOut from "react-stripe-checkout";
+import { userRequest } from "../requestMethods";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   types: string;
@@ -174,6 +175,9 @@ const Button = styled.button`
 `;
 
 const CartView: React.FC = () => {
+  //const KEY = process.env.REACT_APP_STRIPE_KEY;
+  const KEY =
+    "pk_test_51KfYX0KA7bOUbbcbmNXsiJSLpgyzTD0ypY7sGNI4NVTmhTd9Acsz5veQCvKcwMY3LFuJxBgcb086WZ2duRCeAGOX009MY6fd4D";
   const cart = useSelector((state: any) => state.cart);
   const items = useSelector((state: any) => state.cart.quantity);
   // const [quantity, setQuantity] = useState(1);
@@ -181,7 +185,32 @@ const CartView: React.FC = () => {
   const handleDelete = (product: any) => {
     deleteProduct(product, dispatch);
   };
+  const [stripeToken, setStripeToken] = useState<any>();
 
+  const onToken = (token: any) => {
+    setStripeToken(token);
+  };
+
+  const paymennt = () => {
+    for (let i = 0; i < cart.products.length; i++) {
+      console.log(cart.products[i]);
+      handleDelete(cart.products[i]);
+    }
+  };
+  const history = useNavigate();
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: cart.total * 100,
+        });
+        paymennt();
+        history("/");
+      } catch {}
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken, cart.total, history]);
   return (
     <Container>
       <Announcement />
@@ -248,7 +277,18 @@ const CartView: React.FC = () => {
               <SummaryItemPrice>${cart.total}</SummaryItemPrice>
             </SummaryItem>
 
-            <Button>CHECKOUT NOW</Button>
+            <StripeCheckOut
+              name="Gamer Store"
+              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY as string}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckOut>
           </Summary>
         </Bottom>
       </Wrapper>
