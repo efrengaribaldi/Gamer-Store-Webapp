@@ -175,9 +175,7 @@ const Button = styled.button`
 `;
 
 const CartView: React.FC = () => {
-  //const KEY = process.env.REACT_APP_STRIPE_KEY;
-  const KEY =
-    "pk_test_51KfYX0KA7bOUbbcbmNXsiJSLpgyzTD0ypY7sGNI4NVTmhTd9Acsz5veQCvKcwMY3LFuJxBgcb086WZ2duRCeAGOX009MY6fd4D";
+  const KEY = process.env.REACT_APP_STRIPE_KEY!;
   const cart = useSelector((state: any) => state.cart);
   const items = useSelector((state: any) => state.cart.quantity);
   // const [quantity, setQuantity] = useState(1);
@@ -193,7 +191,6 @@ const CartView: React.FC = () => {
 
   const paymennt = () => {
     for (let i = 0; i < cart.products.length; i++) {
-      console.log(cart.products[i]);
       handleDelete(cart.products[i]);
     }
   };
@@ -279,7 +276,7 @@ const CartView: React.FC = () => {
 
             <StripeCheckOut
               name="Gamer Store"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              image="https://seeklogo.com/images/L/logitech-gaming-logo-B76FC713B0-seeklogo.com.png"
               billingAddress
               shippingAddress
               description={`Your total is $${cart.total}`}
