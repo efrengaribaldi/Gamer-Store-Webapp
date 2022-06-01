@@ -54,8 +54,8 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
-  &:disabled{
-    color: green,
+  &:disabled {
+    color: green;
     cursor: not-allowed;
   }
 `;
@@ -92,11 +92,13 @@ const LoginView: React.FC = () => {
         <Title>SIGN IN</Title>
         <Form>
           <Input
+            id="userN"
             placeholder="username"
             onChange={(e) => setUsername(e.target.value)}
           ></Input>
 
           <Input
+            id="pwd"
             placeholder="password"
             type={"password"}
             onChange={(e) => setPassword(e.target.value)}

@@ -39,7 +39,9 @@ const Container = styled.div`
   }
 `;
 const Image = styled.img`
-  height: 75%;
+  height: 85%;
+  width: 90%;
+  object-fit: cover;
   z-index: 2;
 `;
 const Circle = styled.div`
