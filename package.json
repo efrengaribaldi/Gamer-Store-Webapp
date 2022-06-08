@@ -1,7 +1,6 @@
 {
   "name": "gamer-store-webapp",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "https://github.com/Lars17S/Gamer-Store-Webapp.git",
   "author": "Lars17S <efren.garibaldi@gmail.com>",
   "license": "MIT",
