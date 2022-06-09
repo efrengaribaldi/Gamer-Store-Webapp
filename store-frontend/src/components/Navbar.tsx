@@ -96,7 +96,7 @@ const Navbar: React.FC<any> = ({ user }) => {
     try {
       await logout(dispatch);
       window.open(
-        `https://gamer-store-webapp-backend.herokuapp.com/api/auth/logut`,
+        `https://gamer-store-webapp-backend.herokuapp.com/api/auth/logout`,
         "_self"
       );
     } catch (err) {
