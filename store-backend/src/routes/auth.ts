@@ -5,7 +5,7 @@ import CryptoJS from "crypto-js";
 import passport from "passport";
 
 const authRouter = express.Router();
-const CLIENT_URL = "http://localhost:3000/";
+const CLIENT_URL = "https://gamer-store-webapp-frontend.herokuapp.com/";
 
 // Register
 authRouter.post("/register", async (req, res) => {

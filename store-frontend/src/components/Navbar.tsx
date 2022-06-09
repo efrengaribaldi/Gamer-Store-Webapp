@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import { logout } from "../redux/apiCalls";
+import { publicRequest } from "../requestMethods";
 
 import { mobails, tablet } from "../responsive";
 
@@ -94,7 +95,8 @@ const Navbar: React.FC<any> = ({ user }) => {
     e.preventDefault();
     try {
       await logout(dispatch);
-      window.open("http://localhost:5002/api/auth/logout", "_self");
+      const res = publicRequest.getUri();
+      window.open(`${res}auth/logout`, "_self");
     } catch (err) {
       console.log(err);
     }
