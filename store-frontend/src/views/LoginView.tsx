@@ -85,7 +85,10 @@ const LoginView: React.FC = () => {
 
   const handleGoogleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    window.open(`${process.env.BACKEND_URL}auth/google`, "_self");
+    window.open(
+      `https://gamer-store-webapp-backend.herokuapp.com/api/auth/google`,
+      "_self"
+    );
   };
   return (
     <Container>
