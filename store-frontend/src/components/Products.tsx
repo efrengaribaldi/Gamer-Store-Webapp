@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { publicRequest } from "../requestMethods";
 import Product from "./Product";
 
 const Container = styled.div`
@@ -47,8 +48,8 @@ const Products: React.FC<ProductsProps> = ({ filters, sort }) => {
 
     const getProducts = async () => {
       try {
-        const res = await axios.get<IProduct[]>(
-          `http://localhost:5002/api/products?${searchParams.toString()}`
+        const res = await publicRequest.get(
+          `/products?${searchParams.toString()}`
         );
         setProducts(res.data);
       } catch (err) {}
