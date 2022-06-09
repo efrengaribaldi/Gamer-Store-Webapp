@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobails, tablet } from "../responsive";
 import GoogleIcon from "@mui/icons-material/Google";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div`
   width: 110v;
@@ -84,7 +85,8 @@ const LoginView: React.FC = () => {
 
   const handleGoogleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    window.open("http://localhost:5002/api/auth/google", "_self");
+    const res = publicRequest.getUri();
+    window.open(`${res}auth/google`, "_self");
   };
   return (
     <Container>
