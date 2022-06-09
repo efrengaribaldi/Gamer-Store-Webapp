@@ -35,15 +35,17 @@
     "react-scripts": "5.0.0",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^6.1.2",
+    "serve": "^13.0.2",
     "styled-components": "^5.3.3",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
-    "build": "node --max_old_space_size=2560 node_modules/.bin/react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "cypress open",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dist": "yarn run serve build"
   },
   "eslintConfig": {
     "extends": [
