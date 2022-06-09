@@ -14,7 +14,6 @@ import {
 } from "./userRedux";
 import { publicRequest } from "../requestMethods";
 import { removeProduct } from "./cartRedux";
-import axios from "axios";
 
 export const login = async (dispatch: any, user: any) => {
   dispatch(loginStart());
@@ -31,17 +30,14 @@ export const loginGoogle = async (
 ) => {
   dispatch(loginStartGoogle());
   try {
-    const res = await axios.get(
-      "http://localhost:5002/api/auth/login/success",
-      {
-        withCredentials: true,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      }
-    );
+    const res = await publicRequest.get("/auth/login/success", {
+      withCredentials: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
+    });
     if (res.status !== 200) {
       throw new Error(
         "google authentication has been failed or there is not a currently google session!"
