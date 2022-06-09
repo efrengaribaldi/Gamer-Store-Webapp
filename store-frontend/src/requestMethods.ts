@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://gamer-store-webapp-backend.herokuapp.com/api/";
-const TOKEN = "https://gamer-store-webapp-backend.herokuapp.com/api/";
+const BASE_URL = process.env.BACKEND_URL;
+const TOKEN = process.env.BACKEND_URL;
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
