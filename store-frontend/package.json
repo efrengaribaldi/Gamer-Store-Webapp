@@ -45,7 +45,7 @@
     "build": "react-scripts build",
     "test": "cypress open",
     "eject": "react-scripts eject",
-    "dist": "yarn run serve build"
+    "dist": "yarn run serve -s build"
   },
   "eslintConfig": {
     "extends": [
