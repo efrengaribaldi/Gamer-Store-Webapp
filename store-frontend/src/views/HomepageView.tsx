@@ -17,7 +17,7 @@ const HomepageView: React.FC = () => {
       <Announcement />
       <Slider />
       <Categories />
-      <Products filters={{}} sort={""} />
+      {/* <Products filters={{}} sort={""} /> */}
       <Footer />
     </div>
   );
