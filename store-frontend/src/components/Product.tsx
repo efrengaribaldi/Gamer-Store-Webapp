@@ -76,14 +76,14 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({ id, img }) => {
   return (
-    <Container>
+    <Container id="shop-container">
       <Circle />
       <Image src={img} />
       <Info>
         <Icon>
           <ShoppingCartOutlined />
         </Icon>
-        <Icon>
+        <Icon id="shop-product">
           <Link to={`/product/${id}`}>
             <SearchOutlined />
           </Link>

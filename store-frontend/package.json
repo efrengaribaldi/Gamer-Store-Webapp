@@ -64,6 +64,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^10.0.0"
+    "cypress": "^10.0.0",
+    "cypress-plugin-stripe-elements": "^1.0.2"
   }
 }

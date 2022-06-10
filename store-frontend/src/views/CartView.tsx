@@ -277,8 +277,6 @@ const CartView: React.FC = () => {
             <StripeCheckOut
               name="Gamer Store"
               image="https://seeklogo.com/images/L/logitech-gaming-logo-B76FC713B0-seeklogo.com.png"
-              billingAddress
-              shippingAddress
               description={`Your total is $${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
